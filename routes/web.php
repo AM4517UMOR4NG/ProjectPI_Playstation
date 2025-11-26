@@ -27,6 +27,7 @@ use App\Http\Controllers\Kasir\TransaksiController;
 use App\Http\Controllers\Admin\ImpersonateController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\ProfileController;
+use App\Models\UnitPS;
 
 // Midtrans webhook (must be outside auth middleware)
 Route::post('midtrans/notification', [MidtransController::class, 'notification'])->name('midtrans.notification');
@@ -43,12 +44,15 @@ Route::get('/', function () {
             default => redirect()->route('dashboard.pelanggan'),
         };
     }
-    return view('landing');
+    $featuredUnits = UnitPS::whereNotNull('foto')->where('foto', '!=', '')->inRandomOrder()->limit(3)->get();
+    return view('landing', compact('featuredUnits'));
 });
 
 // Public landing page (direct link)
-// Public landing page (direct link)
-Route::view('/landing', 'landing')->name('landing');
+Route::get('/landing', function () {
+    $featuredUnits = UnitPS::whereNotNull('foto')->where('foto', '!=', '')->inRandomOrder()->limit(3)->get();
+    return view('landing', compact('featuredUnits'));
+})->name('landing');
 
 // Guest Pages
 Route::view('/about', 'pages.about')->name('about');
