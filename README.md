@@ -94,7 +94,7 @@ Follow these steps to set up the project locally:
 
 1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/yourusername/your-repo-name.git
+    git clone https://github.com/AM4517UMOR4NG/ProjectPI_Playstation.git
     cd your-repo-name
     ```
 
