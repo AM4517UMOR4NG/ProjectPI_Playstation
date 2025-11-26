@@ -59,3 +59,82 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+# Playstation Rental Management System
+
+## Overview
+**Playstation Rental Management System** is a comprehensive web application designed to streamline the operations of a Playstation rental business. It features a robust Point of Sale (POS) system, real-time inventory tracking, and secure role-based access control for Admins, Cashiers, and Customers.
+
+## Key Features
+
+### 🎭 Role-Based Access Control
+- **Admin**: Full control over the system, including user management, inventory, and financial reporting.
+- **Kasir (Cashier)**: Dedicated interface for processing rentals, managing transactions, and viewing daily shifts.
+- **Pelanggan (Customer)**: User-friendly portal to browse available units, view rental history, and make bookings.
+
+### 📊 Dashboard & Analytics
+- Real-time overview of **Revenue**, **Active Rentals**, and **Total Transactions**.
+- Visual charts and graphs for monthly performance tracking.
+- Recent activity logs to monitor system usage.
+
+### 🎮 Rental Management
+- **Unit Management**: Track availability and status of Playstation units.
+- **Booking System**: Easy-to-use interface for creating and managing rental bookings.
+- **Timer Integration**: Automated tracking of rental duration.
+
+### 💳 Payment Integration
+- **Midtrans Support**: Seamless online payment processing for customers.
+- **Transaction History**: Detailed logs of all payments and transaction statuses.
+
+## Installation Guide
+
+Follow these steps to set up the project locally:
+
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/yourusername/your-repo-name.git
+    cd your-repo-name
+    ```
+
+2.  **Install Dependencies**
+    ```bash
+    composer install
+    npm install
+    ```
+
+3.  **Environment Setup**
+    Copy the example environment file and configure your database and Midtrans credentials:
+    ```bash
+    cp .env.example .env
+    ```
+    Update `.env` with your DB credentials and Midtrans keys:
+    ```ini
+    DB_DATABASE=your_database_name
+    MIDTRANS_SERVER_KEY=your_server_key
+    MIDTRANS_CLIENT_KEY=your_client_key
+    ```
+
+4.  **Generate Application Key**
+    ```bash
+    php artisan key:generate
+    ```
+
+5.  **Run Migrations & Seeders**
+    ```bash
+    php artisan migrate --seed
+    ```
+
+6.  **Build Assets & Run Server**
+    ```bash
+    npm run build
+    php artisan serve
+    ```
+
+## Technology Stack
+-   **Framework**: Laravel 11
+-   **Frontend**: Blade Templates, Bootstrap / Tailwind CSS
+-   **Database**: MySQL
+-   **Payment Gateway**: Midtrans
+
