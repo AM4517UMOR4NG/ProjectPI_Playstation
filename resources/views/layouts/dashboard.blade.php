@@ -504,6 +504,139 @@
                 linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
         }
+        
+        /* ============================================
+           LIGHT MODE - COMPREHENSIVE TEXT FIX
+           Semua teks harus gelap di background terang
+           ============================================ */
+        
+        /* Fix .text-light class - ini yang menyebabkan teks tidak terbaca */
+        body.light-mode .text-light {
+            color: #1e293b !important;
+        }
+        
+        /* Fix semua teks dalam tabel */
+        body.light-mode .table,
+        body.light-mode .table td,
+        body.light-mode .table th,
+        body.light-mode .table span,
+        body.light-mode .table a,
+        body.light-mode .premium-table td,
+        body.light-mode .premium-table span {
+            color: #1e293b !important;
+        }
+        
+        /* Fix teks dalam card biasa (bukan gradient) */
+        body.light-mode .card:not([style*="gradient"]) {
+            color: #1e293b;
+        }
+        
+        body.light-mode .card:not([style*="gradient"]) h1,
+        body.light-mode .card:not([style*="gradient"]) h2,
+        body.light-mode .card:not([style*="gradient"]) h3,
+        body.light-mode .card:not([style*="gradient"]) h4,
+        body.light-mode .card:not([style*="gradient"]) h5,
+        body.light-mode .card:not([style*="gradient"]) h6,
+        body.light-mode .card:not([style*="gradient"]) p,
+        body.light-mode .card:not([style*="gradient"]) span,
+        body.light-mode .card:not([style*="gradient"]) div,
+        body.light-mode .card:not([style*="gradient"]) .text-light,
+        body.light-mode .card:not([style*="gradient"]) .fw-bold,
+        body.light-mode .card:not([style*="gradient"]) .fw-medium {
+            color: #1e293b !important;
+        }
+        
+        /* Fix stat-card dan premium-metric text */
+        body.light-mode .stat-card .stat-label,
+        body.light-mode .stat-card .stat-number {
+            color: #1e293b !important;
+        }
+        
+        /* Fix table header text */
+        body.light-mode .table-header h6,
+        body.light-mode .table-header span {
+            color: #1e293b !important;
+        }
+        
+        /* Fix avatar text - tetap putih karena background gelap */
+        body.light-mode .avatar-sm {
+            color: #ffffff !important;
+        }
+        
+        /* Fix date-badge icon */
+        body.light-mode .date-badge {
+            background: rgba(21, 93, 252, 0.15);
+        }
+        
+        body.light-mode .date-badge i {
+            color: #155DFC !important;
+        }
+        
+        /* Fix method badge */
+        body.light-mode .method-badge {
+            background: rgba(21, 93, 252, 0.1) !important;
+            color: #155DFC !important;
+            border-color: rgba(21, 93, 252, 0.3) !important;
+        }
+        
+        /* Fix amount text */
+        body.light-mode .amount-text {
+            color: #059669 !important;
+        }
+        
+        /* Fix gradient text untuk heading */
+        body.light-mode .gradient-text {
+            background: linear-gradient(135deg, #155DFC 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Fix premium metric cards - tetap putih karena background gradient */
+        body.light-mode .premium-metric,
+        body.light-mode .premium-metric .metric-label,
+        body.light-mode .premium-metric .metric-value,
+        body.light-mode .premium-metric .metric-trend,
+        body.light-mode .premium-metric .metric-trend span,
+        body.light-mode .premium-metric .metric-icon {
+            color: #ffffff !important;
+        }
+        
+        /* Fix stat-card background untuk light mode */
+        body.light-mode .stat-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* Fix premium-table-card */
+        body.light-mode .premium-table-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+        
+        body.light-mode .premium-table-card .table-header {
+            background: linear-gradient(135deg, rgba(21, 93, 252, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        body.light-mode .premium-table thead th {
+            background: #f8fafc !important;
+            color: #1e293b !important;
+        }
+        
+        body.light-mode .premium-table tbody tr:hover {
+            background: rgba(21, 93, 252, 0.05) !important;
+        }
+        
+        /* Fix semua link dalam tabel */
+        body.light-mode .table a:not(.btn) {
+            color: #155DFC !important;
+        }
+        
+        /* Fix code tag */
+        body.light-mode code {
+            background: #f1f5f9 !important;
+            color: #0f172a !important;
+        }
 
         body {
             background-color: var(--bg-dark);
