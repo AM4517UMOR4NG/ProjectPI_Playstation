@@ -53,13 +53,33 @@
 
     <div class="card">
         <div class="card-body p-4">
-            <form method="POST" action="{{ route('pelanggan.profile.update') }}">
+            <form method="POST" action="{{ route('pelanggan.profile.update') }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 
                 <div class="row g-4">
                     <div class="col-12">
                         <h5 class="text-white fw-bold border-bottom border-secondary pb-2 mb-3">Informasi Dasar</h5>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label text-muted fw-bold small text-uppercase">Foto Profil</label>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-dark rounded-circle d-flex align-items-center justify-content-center text-white fw-bold overflow-hidden border border-secondary" style="width: 64px; height: 64px;">
+                                @if($user->avatar)
+                                    <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar" class="w-100 h-100 object-fit-cover">
+                                @else
+                                    {{ substr($user->name, 0, 1) }}
+                                @endif
+                            </div>
+                            <div class="flex-grow-1">
+                                <input type="file" name="avatar" class="form-control bg-dark text-light border-secondary @error('avatar') is-invalid @enderror" accept="image/*">
+                                <small class="text-muted">Format: JPG, PNG, JPEG. Maks: 2MB.</small>
+                                @error('avatar')
+                                    <small class="text-danger mt-1 d-block">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="col-md-6">
