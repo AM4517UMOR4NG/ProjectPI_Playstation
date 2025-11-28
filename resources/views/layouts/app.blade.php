@@ -28,6 +28,65 @@
         .page-header {
             margin: 1.5rem 0;
         }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .card {
+            background-color: #1e1e1e;
+            border-color: #333;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .table {
+            color: #e0e0e0;
+            border-color: #333;
+        }
+
+        body.dark-mode .table-striped>tbody>tr:nth-of-type(odd)>* {
+            color: #e0e0e0;
+            background-color: #2c2c2c;
+        }
+
+        body.dark-mode .form-control,
+        body.dark-mode .form-select {
+            background-color: #2c2c2c;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .form-control:focus,
+        body.dark-mode .form-select:focus {
+            background-color: #333;
+            color: #fff;
+            border-color: #0d6efd;
+        }
+
+        body.dark-mode .app-navbar {
+            background: linear-gradient(90deg, #050505, #0a192f);
+        }
+        
+        .btn-theme-toggle {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-theme-toggle:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
     </style>
 </head>
 
@@ -54,6 +113,11 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('login.show') }}">Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('register.show') }}">Register</a></li>
                     @endguest
+                    <li class="nav-item">
+                        <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle Dark Mode">
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -103,6 +167,35 @@
         @if(session('error'))
             showFlashMessage('{{ session('error') }}', 'danger');
         @endif
+        @if(session('error'))
+            showFlashMessage('{{ session('error') }}', 'danger');
+        @endif
+
+        // Dark Mode Logic
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = toggleBtn.querySelector('i');
+
+        // Check local storage
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.remove('bi-moon-fill');
+            icon.classList.add('bi-sun-fill');
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                icon.classList.remove('bi-moon-fill');
+                icon.classList.add('bi-sun-fill');
+            } else {
+                localStorage.setItem('theme', 'light');
+                icon.classList.remove('bi-sun-fill');
+                icon.classList.add('bi-moon-fill');
+            }
+        });
     </script>
 </body>
 
