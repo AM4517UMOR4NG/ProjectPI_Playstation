@@ -11,7 +11,9 @@
             <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#filterModal">
                 <i class="bi bi-calendar-range me-2"></i>Filter Tanggal
             </button>
-            <button class="btn btn-success btn-sm"><i class="bi bi-file-earmark-excel me-2"></i>Export Excel</button>
+            <a href="{{ route('pemilik.laporan_pendapatan.export', ['dari' => request('dari'), 'sampai' => request('sampai')]) }}" class="btn btn-success btn-sm">
+                <i class="bi bi-file-earmark-excel me-2"></i>Export Excel
+            </a>
         </div>
     </div>
 
