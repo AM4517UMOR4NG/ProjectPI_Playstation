@@ -551,7 +551,7 @@
     }
     
     body.light-mode .dash-card::before {
-        background: linear-gradient(90deg, #155DFC, #7c3aed, #10b981);
+        background: linear-gradient(90deg, #155DFC, #3b82f6, #2563eb);
     }
     
     body.light-mode .dash-card:hover {

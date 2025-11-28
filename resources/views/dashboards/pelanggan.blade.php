@@ -3,7 +3,7 @@
 @section('pelanggan_content')
 <div class="container-fluid">
     <!-- Hero Section -->
-    <div class="text-center py-5 mb-4 rounded-4 position-relative overflow-hidden" style="background: linear-gradient(135deg, rgba(108, 99, 255, 0.2), rgba(34, 211, 238, 0.2)); border: 1px solid var(--card-border);">
+    <div class="text-center py-5 mb-4 rounded-4 position-relative overflow-hidden" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2)); border: 1px solid var(--card-border);">
         <div class="position-relative z-1">
             <h2 class="fw-bold display-5 mb-3 text-white">Selamat Datang, {{ Auth::user()->name }}!</h2>
             <p class="lead text-muted mb-0" style="max-width: 600px; margin: 0 auto;">
@@ -16,7 +16,7 @@
     <!-- Unit PS Section -->
     <section class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold m-0"><i class="bi bi-controller me-2 text-primary"></i>Unit PlayStation</h4>
+            <h4 class="fw-bold m-0"><i class="bi bi-controller me-2" style="color: #3b82f6;"></i>Unit PlayStation</h4>
             <a href="{{ route('pelanggan.unitps.index') }}" class="btn btn-sm btn-outline-light rounded-pill px-3">Lihat Semua</a>
         </div>
         
@@ -49,7 +49,7 @@
                             <p class="text-muted small mb-3">{{ $unit->brand }}</p>
                             
                             <div class="d-flex justify-content-between align-items-center mt-auto">
-                                <div class="text-secondary fw-bold">Rp {{ number_format($unit->price_per_hour, 0, ',', '.') }}<span class="small text-muted fw-normal">/jam</span></div>
+                                <div class="fw-bold" style="color: #60a5fa;">Rp {{ number_format($unit->price_per_hour, 0, ',', '.') }}<span class="small text-muted fw-normal">/jam</span></div>
                                 <a href="{{ route('pelanggan.rentals.create') }}?type=unitps&id={{ $unit->id }}" class="btn btn-sm btn-primary rounded-pill px-3">
                                     Sewa
                                 </a>
@@ -70,7 +70,7 @@
     <!-- Games Section -->
     <section class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold m-0"><i class="bi bi-disc me-2 text-info"></i>Games Populer</h4>
+            <h4 class="fw-bold m-0"><i class="bi bi-disc me-2" style="color: #3b82f6;"></i>Games Populer</h4>
             <a href="{{ route('pelanggan.games.index') }}" class="btn btn-sm btn-outline-light rounded-pill px-3">Lihat Semua</a>
         </div>
         
@@ -91,7 +91,7 @@
                             <p class="text-muted small mb-3">{{ $game->platform }} • {{ $game->genre }}</p>
                             
                             <div class="d-flex justify-content-between align-items-center mt-auto">
-                                <div class="text-secondary fw-bold">Rp {{ number_format($game->harga_per_hari, 0, ',', '.') }}<span class="small text-muted fw-normal">/hari</span></div>
+                                <div class="fw-bold" style="color: #60a5fa;">Rp {{ number_format($game->harga_per_hari, 0, ',', '.') }}<span class="small text-muted fw-normal">/hari</span></div>
                                 <a href="{{ route('pelanggan.rentals.create') }}?type=game&id={{ $game->id }}" class="btn btn-sm btn-primary rounded-pill px-3">
                                     Sewa
                                 </a>
@@ -112,7 +112,7 @@
     <!-- Accessories Section -->
     <section class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold m-0"><i class="bi bi-headset me-2 text-warning"></i>Aksesoris</h4>
+            <h4 class="fw-bold m-0"><i class="bi bi-headset me-2" style="color: #3b82f6;"></i>Aksesoris</h4>
             <a href="{{ route('pelanggan.accessories.index') }}" class="btn btn-sm btn-outline-light rounded-pill px-3">Lihat Semua</a>
         </div>
         
@@ -133,7 +133,7 @@
                             <p class="text-muted small mb-3">{{ $acc->jenis }}</p>
                             
                             <div class="d-flex justify-content-between align-items-center mt-auto">
-                                <div class="text-secondary fw-bold">Rp {{ number_format($acc->harga_per_hari, 0, ',', '.') }}<span class="small text-muted fw-normal">/hari</span></div>
+                                <div class="fw-bold" style="color: #60a5fa;">Rp {{ number_format($acc->harga_per_hari, 0, ',', '.') }}<span class="small text-muted fw-normal">/hari</span></div>
                                 <a href="{{ route('pelanggan.rentals.create') }}?type=accessory&id={{ $acc->id }}" class="btn btn-sm btn-primary rounded-pill px-3">
                                     Sewa
                                 </a>
