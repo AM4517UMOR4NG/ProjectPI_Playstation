@@ -17,6 +17,8 @@ class Payment extends Model
         'reference',
         'paid_at',
         'order_id',
+        'snap_token',
+        'snap_token_expires_at',
         'transaction_id',
         'transaction_status',
         'payment_type',
@@ -29,6 +31,7 @@ class Payment extends Model
     protected $casts = [
         'paid_at' => 'datetime',
         'transaction_time' => 'datetime',
+        'snap_token_expires_at' => 'datetime',
     ];
 
     public function rental(): BelongsTo
@@ -103,6 +106,31 @@ class Payment extends Model
     public function scopeFailed($query)
     {
         return $query->whereIn('transaction_status', ['deny', 'cancel', 'expire']);
+    }
+
+    /**
+     * Check if snap token is still valid (not expired)
+     */
+    public function hasValidSnapToken(): bool
+    {
+        if (empty($this->snap_token)) {
+            return false;
+        }
+
+        // Snap token expires after 24 hours by default
+        if ($this->snap_token_expires_at && $this->snap_token_expires_at->isPast()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if payment can be resumed (pending and has valid snap token)
+     */
+    public function canResume(): bool
+    {
+        return $this->isPending() && $this->hasValidSnapToken();
     }
 }
 
