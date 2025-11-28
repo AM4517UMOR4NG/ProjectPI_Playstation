@@ -189,6 +189,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         ->middleware(['throttle:3,1', 'ensure.profile.complete']) // Max 3 requests per minute + check profile
         ->name('pelanggan.rentals.store');
     Route::get('pelanggan/rentals/{rental}', [PelangganRentalController::class, 'show'])->name('pelanggan.rentals.show');
+    Route::get('pelanggan/rentals/{rental}/pay', [PelangganRentalController::class, 'resumePayment'])->name('pelanggan.rentals.pay');
     Route::post('pelanggan/rentals/{rental}/return', [PelangganRentalController::class, 'returnRental'])->name('pelanggan.rentals.return');
 });
 
