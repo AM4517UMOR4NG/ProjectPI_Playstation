@@ -100,4 +100,51 @@ class StatusProdukController extends Controller
             'stats', 'search'
         ));
     }
+
+    /**
+     * Menampilkan daftar item yang rusak
+     */
+    public function damaged()
+    {
+        Gate::authorize('access-pemilik');
+        
+        // Get all damaged items
+        $damagedUnits = UnitPS::where('kondisi', 'rusak')->orderBy('updated_at', 'desc')->get();
+        $damagedGames = Game::where('kondisi', 'rusak')->orderBy('updated_at', 'desc')->get();
+        $damagedAccessories = Accessory::where('kondisi', 'rusak')->orderBy('updated_at', 'desc')->get();
+        
+        // Get items with kondisi_kembali = rusak from rental items
+        $damagedFromRentals = RentalItem::with(['rental.customer', 'rentable'])
+            ->where('kondisi_kembali', 'rusak')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        
+        $stats = [
+            'units' => $damagedUnits->count(),
+            'games' => $damagedGames->count(),
+            'accessories' => $damagedAccessories->count(),
+            'from_rentals' => $damagedFromRentals->count(),
+            'total' => $damagedUnits->count() + $damagedGames->count() + $damagedAccessories->count(),
+        ];
+        
+        return view('owner.damaged_items', compact(
+            'damagedUnits', 'damagedGames', 'damagedAccessories', 
+            'damagedFromRentals', 'stats'
+        ));
+    }
+
+    /**
+     * Menampilkan daftar transaksi yang dibatalkan
+     */
+    public function cancelledTransactions()
+    {
+        Gate::authorize('access-pemilik');
+        
+        $rentals = Rental::with(['customer', 'items.rentable'])
+            ->where('status', 'cancelled')
+            ->orderByDesc('updated_at')
+            ->paginate(15);
+            
+        return view('owner.cancelled_transactions', compact('rentals'));
+    }
 }

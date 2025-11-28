@@ -600,4 +600,43 @@ class RentalController extends Controller
         return redirect()->route('pelanggan.rentals.show', $rental)
             ->with('status', 'Pengembalian berhasil diajukan. Menunggu konfirmasi dari kasir.');
     }
+
+    /**
+     * User membatalkan transaksi (hanya jika belum lebih dari 30 menit dan status pending)
+     */
+    public function cancel(Rental $rental)
+    {
+        Gate::authorize('access-pelanggan');
+        
+        if ($rental->user_id !== auth()->id()) {
+            abort(403);
+        }
+        
+        // Hanya bisa membatalkan jika status pending
+        if ($rental->status !== 'pending') {
+            return back()->with('error', 'Hanya transaksi dengan status pending yang dapat dibatalkan.');
+        }
+        
+        // Cek apakah sudah lebih dari 30 menit
+        $createdAt = $rental->created_at;
+        $minutesPassed = now()->diffInMinutes($createdAt);
+        
+        if ($minutesPassed > 30) {
+            return back()->with('error', 'Transaksi tidak dapat dibatalkan karena sudah lebih dari 30 menit. Silakan hubungi kasir.');
+        }
+        
+        // Batalkan transaksi
+        $rental->update([
+            'status' => 'cancelled',
+            'notes' => ($rental->notes ? $rental->notes . ' | ' : '') . 'Dibatalkan oleh pelanggan pada ' . now()->format('d/m/Y H:i'),
+        ]);
+        
+        // Update payment status jika ada
+        $rental->payments()->where('transaction_status', 'pending')->update([
+            'transaction_status' => 'cancel',
+        ]);
+        
+        return redirect()->route('pelanggan.rentals.index')
+            ->with('status', 'Transaksi berhasil dibatalkan.');
+    }
 }

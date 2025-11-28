@@ -141,4 +141,45 @@ class TransaksiController extends Controller
         
         return redirect()->route('kasir.transaksi.index')->with('status', 'Pengembalian berhasil dikonfirmasi.');
     }
+
+    /**
+     * Kasir membatalkan transaksi user yang pending
+     */
+    public function cancel(Rental $rental)
+    {
+        Gate::authorize('access-kasir');
+        
+        // Hanya bisa membatalkan jika status pending
+        if ($rental->status !== 'pending') {
+            return back()->withErrors(['error' => 'Hanya transaksi dengan status pending yang dapat dibatalkan.']);
+        }
+        
+        // Batalkan transaksi
+        $rental->update([
+            'status' => 'cancelled',
+            'notes' => ($rental->notes ? $rental->notes . ' | ' : '') . 'Dibatalkan oleh kasir (' . auth()->user()->name . ') pada ' . now()->format('d/m/Y H:i'),
+        ]);
+        
+        // Update payment status jika ada
+        $rental->payments()->where('transaction_status', 'pending')->update([
+            'transaction_status' => 'cancel',
+        ]);
+        
+        return redirect()->route('kasir.transaksi.index')->with('status', 'Transaksi berhasil dibatalkan.');
+    }
+
+    /**
+     * Daftar transaksi yang dibatalkan
+     */
+    public function cancelled()
+    {
+        Gate::authorize('access-kasir');
+        
+        $rentals = Rental::with(['customer'])
+            ->where('status', 'cancelled')
+            ->orderByDesc('updated_at')
+            ->paginate(15);
+            
+        return view('kasir.transaksi.cancelled', compact('rentals'));
+    }
 }

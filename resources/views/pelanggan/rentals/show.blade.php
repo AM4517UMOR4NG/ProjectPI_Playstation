@@ -193,6 +193,32 @@
                             <div class="text-muted small mt-2 text-center">
                                 <i class="bi bi-info-circle me-1"></i> Klik jika Anda sudah membayar tapi status belum berubah.
                             </div>
+                            
+                            <!-- Cancel Button (only within 30 minutes) -->
+                            @php
+                                $minutesPassed = now()->diffInMinutes($rental->created_at);
+                                $canCancel = $minutesPassed <= 30;
+                                $remainingMinutes = 30 - $minutesPassed;
+                            @endphp
+                            
+                            <hr class="my-3">
+                            
+                            @if($canCancel)
+                                <form action="{{ route('pelanggan.rentals.cancel', $rental) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin membatalkan transaksi ini?');">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-danger w-100">
+                                        <i class="bi bi-x-circle me-2"></i> Batalkan Transaksi
+                                    </button>
+                                </form>
+                                <div class="text-muted small mt-2 text-center">
+                                    <i class="bi bi-clock me-1"></i> Anda dapat membatalkan dalam {{ $remainingMinutes }} menit lagi.
+                                </div>
+                            @else
+                                <div class="alert alert-secondary border-0 mb-0">
+                                    <i class="bi bi-clock-history me-2"></i>
+                                    <small>Waktu pembatalan sudah lewat (lebih dari 30 menit). Hubungi kasir jika ingin membatalkan.</small>
+                                </div>
+                            @endif
                         </div>
                     @endif
                 </div>

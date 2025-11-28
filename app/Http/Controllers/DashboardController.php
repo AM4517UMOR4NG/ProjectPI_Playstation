@@ -26,21 +26,34 @@ class DashboardController extends Controller
         $unitRented = RentalItem::whereHas('rental', function ($q) { $q->whereIn('status', ['sedang_disewa', 'menunggu_konfirmasi']); })
             ->where('rentable_type', UnitPS::class)
             ->sum('quantity');
-        $unitDamaged = UnitPS::where('kondisi', 'rusak')->count();
+        // Count damaged: from kondisi field OR from rental items returned as rusak
+        $unitDamagedFromKondisi = UnitPS::where('kondisi', 'rusak')->count();
+        $unitDamagedFromRental = RentalItem::where('rentable_type', UnitPS::class)
+            ->where('kondisi_kembali', 'rusak')
+            ->count();
+        $unitDamaged = $unitDamagedFromKondisi + $unitDamagedFromRental;
         $unitTotal = $unitAvailable + $unitRented;
 
         $gameAvailable = $gameData->sum('total_stok');
         $gameRented = RentalItem::whereHas('rental', function ($q) { $q->whereIn('status', ['sedang_disewa', 'menunggu_konfirmasi']); })
             ->where('rentable_type', Game::class)
             ->sum('quantity');
-        $gameDamaged = Game::where('kondisi', 'rusak')->count();
+        $gameDamagedFromKondisi = Game::where('kondisi', 'rusak')->count();
+        $gameDamagedFromRental = RentalItem::where('rentable_type', Game::class)
+            ->where('kondisi_kembali', 'rusak')
+            ->count();
+        $gameDamaged = $gameDamagedFromKondisi + $gameDamagedFromRental;
         $gameTotal = $gameAvailable + $gameRented;
 
         $accAvailable = $accessoryData->sum('total_stok');
         $accRented = RentalItem::whereHas('rental', function ($q) { $q->whereIn('status', ['sedang_disewa', 'menunggu_konfirmasi']); })
             ->where('rentable_type', Accessory::class)
             ->sum('quantity');
-        $accDamaged = Accessory::where('kondisi', 'rusak')->count();
+        $accDamagedFromKondisi = Accessory::where('kondisi', 'rusak')->count();
+        $accDamagedFromRental = RentalItem::where('rentable_type', Accessory::class)
+            ->where('kondisi_kembali', 'rusak')
+            ->count();
+        $accDamaged = $accDamagedFromKondisi + $accDamagedFromRental;
         $accTotal = $accAvailable + $accRented;
 
         // Ambil rental yang aktif untuk menghitung jumlah sewa per item
@@ -53,18 +66,44 @@ class DashboardController extends Controller
                 return $item->rentable_type . '_' . $item->rentable_id;
             });
 
+        // Get damaged count per item from rental_items
+        $damagedPerUnit = RentalItem::where('rentable_type', UnitPS::class)
+            ->where('kondisi_kembali', 'rusak')
+            ->selectRaw('rentable_id, COUNT(*) as damaged_count')
+            ->groupBy('rentable_id')
+            ->pluck('damaged_count', 'rentable_id')
+            ->toArray();
+            
+        $damagedPerGame = RentalItem::where('rentable_type', Game::class)
+            ->where('kondisi_kembali', 'rusak')
+            ->selectRaw('rentable_id, COUNT(*) as damaged_count')
+            ->groupBy('rentable_id')
+            ->pluck('damaged_count', 'rentable_id')
+            ->toArray();
+            
+        $damagedPerAcc = RentalItem::where('rentable_type', Accessory::class)
+            ->where('kondisi_kembali', 'rusak')
+            ->selectRaw('rentable_id, COUNT(*) as damaged_count')
+            ->groupBy('rentable_id')
+            ->pluck('damaged_count', 'rentable_id')
+            ->toArray();
+
         // Optimasi data detail UnitPS
-        $unitps = $unitPSData->map(function($unit) use ($activeRentalItems) {
+        $unitps = $unitPSData->map(function($unit) use ($activeRentalItems, $damagedPerUnit) {
             $key = UnitPS::class . '_' . $unit->id;
             $rentedCount = $activeRentalItems->has($key) ? $activeRentalItems->get($key)->total_rented : 0;
+            $isRusak = ($unit->kondisi ?? 'baik') === 'rusak';
+            $damagedFromRental = $damagedPerUnit[$unit->id] ?? 0;
+            $totalDamaged = ($isRusak ? 1 : 0) + $damagedFromRental;
             
             return [
                 'nama' => $unit->name,
                 'model' => $unit->model,
                 'merek' => $unit->brand,
                 'stok' => $unit->total_stok,
-                'kondisi_baik' => $unit->total_stok,
-                'kondisi_buruk' => 0,
+                'kondisi' => $unit->kondisi ?? 'baik',
+                'kondisi_baik' => $isRusak ? 0 : $unit->total_stok,
+                'kondisi_buruk' => $totalDamaged,
                 'disewa' => $rentedCount,
                 'tersedia' => $unit->total_stok - $rentedCount,
                 'nomor_seri' => $unit->serial_number ?? '-'
@@ -72,33 +111,41 @@ class DashboardController extends Controller
         });
         
         // Optimasi data detail Games
-        $games = $gameData->map(function($game) use ($activeRentalItems) {
+        $games = $gameData->map(function($game) use ($activeRentalItems, $damagedPerGame) {
             $key = Game::class . '_' . $game->id;
             $rentedCount = $activeRentalItems->has($key) ? $activeRentalItems->get($key)->total_rented : 0;
+            $isRusak = ($game->kondisi ?? 'baik') === 'rusak';
+            $damagedFromRental = $damagedPerGame[$game->id] ?? 0;
+            $totalDamaged = ($isRusak ? 1 : 0) + $damagedFromRental;
             
             return [
                 'judul' => $game->judul,
                 'platform' => $game->platform,
                 'genre' => $game->genre,
                 'stok' => $game->total_stok,
-                'kondisi_baik' => $game->total_stok, // Equals total stock since admin adds items as baik
-                'kondisi_buruk' => 0, // Default to 0 since admin adds items as baik
+                'kondisi' => $game->kondisi ?? 'baik',
+                'kondisi_baik' => $isRusak ? 0 : $game->total_stok,
+                'kondisi_buruk' => $totalDamaged,
                 'disewa' => $rentedCount,
                 'tersedia' => $game->total_stok - $rentedCount
             ];
         });
         
         // Optimasi data detail Aksesoris
-        $accessories = $accessoryData->map(function($acc) use ($activeRentalItems) {
+        $accessories = $accessoryData->map(function($acc) use ($activeRentalItems, $damagedPerAcc) {
             $key = Accessory::class . '_' . $acc->id;
             $rentedCount = $activeRentalItems->has($key) ? $activeRentalItems->get($key)->total_rented : 0;
+            $isRusak = ($acc->kondisi ?? 'baik') === 'rusak';
+            $damagedFromRental = $damagedPerAcc[$acc->id] ?? 0;
+            $totalDamaged = ($isRusak ? 1 : 0) + $damagedFromRental;
             
             return [
                 'nama' => $acc->nama,
                 'jenis' => $acc->jenis,
                 'stok' => $acc->total_stok,
-                'kondisi_baik' => $acc->total_stok, // Equals total stock since admin adds items as baik
-                'kondisi_buruk' => 0, // Default to 0 since admin adds items as baik
+                'kondisi' => $acc->kondisi ?? 'baik',
+                'kondisi_baik' => $isRusak ? 0 : $acc->total_stok,
+                'kondisi_buruk' => $totalDamaged,
                 'disewa' => $rentedCount,
                 'tersedia' => $acc->total_stok - $rentedCount
             ];
