@@ -26,7 +26,7 @@ class DashboardController extends Controller
         $unitRented = RentalItem::whereHas('rental', function ($q) { $q->whereIn('status', ['sedang_disewa', 'menunggu_konfirmasi']); })
             ->where('rentable_type', UnitPS::class)
             ->sum('quantity');
-        $unitDamaged = 0; // Unit PS tidak memiliki field kondisi
+        $unitDamaged = UnitPS::where('kondisi', 'rusak')->count();
         $unitTotal = $unitAvailable + $unitRented;
 
         $gameAvailable = $gameData->sum('total_stok');
@@ -141,10 +141,16 @@ class DashboardController extends Controller
         Gate::authorize('access-pemilik');
         
         // KPI Cards Data
-        $availableUnits = UnitPS::count();
-        $availableGames = Game::count();
-        $availableAccessories = Accessory::count();
+        $availableUnits = UnitPS::sum('stock');
+        $availableGames = Game::sum('stok');
+        $availableAccessories = Accessory::sum('stok');
         $todaysTransactions = Rental::whereDate('created_at', now()->toDateString())->count();
+
+        // Damaged Items Count
+        $damagedUnits = UnitPS::where('kondisi', 'rusak')->count();
+        $damagedGames = Game::where('kondisi', 'rusak')->count();
+        $damagedAccessories = Accessory::where('kondisi', 'rusak')->count();
+        $totalDamaged = $damagedUnits + $damagedGames + $damagedAccessories;
 
         // Revenue 7 Days (Simple Calculation for KPI Card)
         $start = now()->copy()->subDays(6)->startOfDay();
@@ -163,7 +169,11 @@ class DashboardController extends Controller
             'availableAccessories',
             'todaysTransactions', 
             'revTotal7', 
-            'recentTransactions'
+            'recentTransactions',
+            'damagedUnits',
+            'damagedGames',
+            'damagedAccessories',
+            'totalDamaged'
         ));
     }
 
