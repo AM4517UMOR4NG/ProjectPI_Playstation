@@ -21,7 +21,7 @@ class RentalController extends Controller
         Gate::authorize('access-pelanggan');
         
         $query = Rental::where('user_id', auth()->id())
-            ->with(['items.rentable']);
+            ->with(['items.rentable', 'payments']);
             
         // Filter by Status
         if ($request->filled('status')) {
@@ -446,12 +446,14 @@ class RentalController extends Controller
             try {
                 $snapToken = $midtrans->createSnapToken($params);
                 
-                // Create payment record with order_id for webhook tracking
+                // Create payment record with order_id and snap_token for webhook tracking and resuming payment
                 \App\Models\Payment::create([
                     'rental_id' => $rental->id,
                     'method' => 'midtrans',
                     'amount' => $totalAmount,
                     'order_id' => $orderId,
+                    'snap_token' => $snapToken,
+                    'snap_token_expires_at' => now()->addHours(24), // Snap token valid for 24 hours
                     'transaction_status' => 'pending',
                 ]);
                 
@@ -520,6 +522,57 @@ class RentalController extends Controller
         }
         
         return view('pelanggan.rentals.show', compact('rental'));
+    }
+
+    /**
+     * Resume pending payment - show payment page with existing snap token
+     */
+    public function resumePayment(Rental $rental)
+    {
+        Gate::authorize('access-pelanggan');
+        
+        if ($rental->user_id !== auth()->id()) {
+            abort(403);
+        }
+        
+        // Only allow resuming pending rentals
+        if ($rental->status !== 'pending') {
+            return redirect()->route('pelanggan.rentals.show', $rental)
+                ->with('error', 'Penyewaan ini tidak dalam status menunggu pembayaran.');
+        }
+        
+        // Get the pending payment with valid snap token
+        $payment = $rental->payments()
+            ->where('transaction_status', 'pending')
+            ->whereNotNull('snap_token')
+            ->latest()
+            ->first();
+        
+        if (!$payment || !$payment->canResume()) {
+            return redirect()->route('pelanggan.rentals.show', $rental)
+                ->with('error', 'Token pembayaran sudah kadaluarsa. Silakan hubungi admin untuk membuat pesanan baru.');
+        }
+        
+        $rental->load('items');
+        
+        // Load rentable items manually
+        foreach ($rental->items as $item) {
+            $modelClass = match($item->rentable_type) {
+                'App\Models\UnitPS', 'unitps' => UnitPS::class,
+                'App\Models\Game', 'game' => Game::class,
+                'App\Models\Accessory', 'accessory' => Accessory::class,
+                default => null,
+            };
+            
+            if ($modelClass && $item->rentable_id) {
+                $item->setRelation('rentable', $modelClass::find($item->rentable_id));
+            }
+        }
+        
+        $snapToken = $payment->snap_token;
+        $orderId = $payment->order_id;
+        
+        return view('pelanggan.payment.midtrans', compact('rental', 'snapToken', 'orderId'));
     }
 
     /**
