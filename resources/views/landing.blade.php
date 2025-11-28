@@ -21,45 +21,88 @@
         </div>
     </header>
 
-    <!-- Featured Units Section (Highlight) -->
-    <section id="featured" class="featured-section">
+    <!-- Complete Experience Section -->
+    <section id="collection" class="collection-section">
         <div class="section-header">
-            <h2>Unit <span class="text-highlight">Unggulan</span></h2>
-            <p>Pilih konsol favoritmu dan mulai bermain hari ini</p>
+            <h2>Lengkapi <span class="text-highlight">Pengalaman Gamingmu</span></h2>
+            <p>Semua yang kamu butuhkan untuk pengalaman gaming terbaik ada di sini</p>
         </div>
-        
-        <div class="features-grid">
-            @forelse($featuredUnits as $unit)
-                <div class="feature-card {{ $loop->first ? 'highlight-card' : '' }}">
-                    @if($loop->first)
-                        <div class="card-badge">Best Choice</div>
-                    @endif
-                    
-                    <div class="card-image-wrapper">
-                        <img src="{{ $unit->foto }}" alt="{{ $unit->nama }}" class="card-image">
-                    </div>
-                    
-                    <h3>{{ $unit->nama }}</h3>
-                    <p class="price">Rp {{ number_format($unit->harga_per_jam, 0, ',', '.') }} / jam</p>
-                    
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> Kondisi: {{ ucfirst($unit->kondisi) }}</li>
-                        <li><i class="fas fa-check"></i> Serial: {{ $unit->nomor_seri }}</li>
-                        <li><i class="fas fa-check"></i> Ready Stock</li>
-                    </ul>
-                    <a href="{{ route('register.show') }}" class="btn-card">Sewa Sekarang</a>
+
+        <div class="tabs-container">
+            <div class="tabs-nav">
+                <button class="tab-btn active" data-target="units">
+                    <i class="fas fa-gamepad"></i> Konsol
+                </button>
+                <button class="tab-btn" data-target="games">
+                    <i class="fas fa-compact-disc"></i> Games
+                </button>
+                <button class="tab-btn" data-target="accessories">
+                    <i class="fas fa-headset"></i> Aksesoris
+                </button>
+            </div>
+
+            <div class="tab-content active" id="units">
+                <div class="features-grid">
+                    @forelse($featuredUnits as $unit)
+                        <div class="feature-card">
+                            <div class="card-image-wrapper">
+                                <img src="{{ $unit->foto }}" alt="{{ $unit->nama }}" class="card-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/300x200?text=No+Image';">
+                            </div>
+                            <div class="card-body">
+                                <h3>{{ $unit->nama }}</h3>
+                                <p class="price">Rp {{ number_format($unit->harga_per_jam, 0, ',', '.') }} / jam</p>
+                                <a href="{{ route('register.show') }}" class="btn-card">Sewa Sekarang</a>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="empty-state">Belum ada unit tersedia</div>
+                    @endforelse
                 </div>
-            @empty
-                <!-- Fallback if no units found -->
-                <div class="feature-card">
-                    <div class="card-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80" alt="PlayStation 5" class="card-image">
-                    </div>
-                    <h3>PlayStation 5</h3>
-                    <p class="price">Mulai Rp 150.000 / hari</p>
-                    <a href="{{ route('register.show') }}" class="btn-card">Sewa PS5</a>
+            </div>
+
+            <div class="tab-content" id="games">
+                <div class="features-grid">
+                    @forelse($featuredGames as $game)
+                        <div class="feature-card">
+                            <div class="card-image-wrapper">
+                                <img src="{{ !empty($game->gambar) ? $game->gambar : 'https://via.placeholder.com/300x400?text=No+Image' }}" alt="{{ $game->judul }}" class="card-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/300x400?text=No+Image';">
+                            </div>
+                            <div class="card-body">
+                                <h3>{{ $game->judul }}</h3>
+                                <p class="genre">{{ $game->genre }}</p>
+                                <a href="{{ route('register.show') }}" class="btn-card">Sewa Sekarang</a>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="empty-state">Belum ada game tersedia</div>
+                    @endforelse
                 </div>
-            @endforelse
+            </div>
+
+            <div class="tab-content" id="accessories">
+                <div class="features-grid">
+                    @forelse($featuredAccessories as $accessory)
+                        <div class="feature-card">
+                            <div class="card-image-wrapper">
+                                <img src="{{ !empty($accessory->gambar) ? $accessory->gambar : 'https://via.placeholder.com/300x300?text=No+Image' }}" alt="{{ $accessory->nama }}" class="card-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/300x300?text=No+Image';">
+                            </div>
+                            <div class="card-body">
+                                <h3>{{ $accessory->nama }}</h3>
+                                <p class="price">Rp {{ number_format($accessory->harga_sewa, 0, ',', '.') }} / jam</p>
+                                <a href="{{ route('register.show') }}" class="btn-card">Sewa Sekarang</a>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="empty-state">Belum ada aksesoris tersedia</div>
+                    @endforelse
+                </div>
+            </div>
+            
+            <div class="cta-container">
+                <a href="{{ route('register.show') }}" class="btn-hero btn-primary">
+                    <i class="fas fa-rocket"></i> Mulai Sewa Sekarang
+                </a>
+            </div>
         </div>
     </section>
 
@@ -165,84 +208,88 @@
         background: rgba(255, 255, 255, 0.2);
     }
 
-    /* Featured Section */
-    .featured-section {
+    /* Collection Section */
+    .collection-section {
         padding: 80px 20px;
         background: #f8f9fa;
         text-align: center;
     }
 
-    .section-header {
-        margin-bottom: 60px;
+    .tabs-nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
     }
 
-    .section-header h2 {
-        font-size: 2.5rem;
-        color: #1a1a1a;
-        margin-bottom: 10px;
+    .tab-btn {
+        padding: 12px 30px;
+        border: none;
+        background: white;
+        color: #666;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        font-size: 1rem;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+        background: #00d4ff;
+        color: #000428;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+    }
+
+    .tab-content {
+        display: none;
+        animation: fadeIn 0.5s ease;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .features-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 30px;
         max-width: 1200px;
-        margin: 0 auto;
+        margin: 0 auto 50px;
     }
 
     .feature-card {
         background: white;
-        padding: 40px;
         border-radius: 20px;
+        overflow: hidden;
         box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         transition: transform 0.3s ease;
-        position: relative;
-        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
 
     .feature-card:hover {
         transform: translateY(-10px);
     }
 
-    .highlight-card {
-        border: 2px solid #00d4ff;
-        transform: scale(1.05);
-    }
-
-    .highlight-card:hover {
-        transform: scale(1.05) translateY(-10px);
-    }
-
-    .card-badge {
-        position: absolute;
-        top: 20px;
-        right: -35px;
-        background: #00d4ff;
-        color: #000428;
-        padding: 5px 40px;
-        transform: rotate(45deg);
-        font-weight: bold;
-        font-size: 0.8rem;
-    }
-
-    .card-icon {
-        font-size: 3rem;
-        color: #004e92;
-        margin-bottom: 20px;
-    }
-
     .card-image-wrapper {
         width: 100%;
-        height: 200px;
+        height: 220px;
         overflow: hidden;
-        border-radius: 10px;
-        margin-bottom: 20px;
     }
 
     .card-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        background: #f8f9fa;
         transition: transform 0.5s ease;
     }
 
@@ -250,8 +297,16 @@
         transform: scale(1.1);
     }
 
+    .card-body {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
     .feature-card h3 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         margin-bottom: 10px;
         color: #1a1a1a;
     }
@@ -263,21 +318,10 @@
         margin-bottom: 20px;
     }
 
-    .feature-list {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 30px;
-        text-align: left;
-    }
-
-    .feature-list li {
-        margin-bottom: 10px;
+    .genre {
         color: #666;
-    }
-
-    .feature-list i {
-        color: #00d4ff;
-        margin-right: 10px;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
     }
 
     .btn-card {
@@ -294,6 +338,17 @@
 
     .btn-card:hover {
         background: #003366;
+    }
+
+    .cta-container {
+        margin-top: 50px;
+    }
+
+    .empty-state {
+        grid-column: 1 / -1;
+        padding: 40px;
+        color: #666;
+        font-style: italic;
     }
 
     /* Benefits Section */
@@ -315,8 +370,26 @@
 
     @media (max-width: 768px) {
         .hero h1 { font-size: 2.5rem; }
-        .highlight-card { transform: none; }
-        .highlight-card:hover { transform: translateY(-10px); }
+        .tab-btn { width: 100%; margin-bottom: 10px; }
     }
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab and target content
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+    });
+</script>
 @endpush
