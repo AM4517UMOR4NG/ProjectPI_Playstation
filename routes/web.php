@@ -28,10 +28,14 @@ use App\Http\Controllers\Admin\ImpersonateController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\ProfileController;
 use App\Models\UnitPS;
+use App\Models\Game;
+use App\Models\Accessory;
 
 // Midtrans webhook (must be outside auth middleware)
 Route::post('midtrans/notification', [MidtransController::class, 'notification'])->name('midtrans.notification');
 Route::get('midtrans/status/{orderId}', [MidtransController::class, 'checkStatus'])->name('midtrans.status');
+
+
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -44,14 +48,18 @@ Route::get('/', function () {
             default => redirect()->route('dashboard.pelanggan'),
         };
     }
-    $featuredUnits = UnitPS::whereNotNull('foto')->where('foto', '!=', '')->inRandomOrder()->limit(3)->get();
-    return view('landing', compact('featuredUnits'));
+    $featuredUnits = UnitPS::whereNotNull('foto')->where('foto', '!=', '')->inRandomOrder()->limit(6)->get();
+    $featuredGames = Game::whereNotNull('gambar')->where('gambar', '!=', '')->inRandomOrder()->limit(6)->get();
+    $featuredAccessories = Accessory::whereNotNull('gambar')->where('gambar', '!=', '')->inRandomOrder()->limit(6)->get();
+    return view('landing', compact('featuredUnits', 'featuredGames', 'featuredAccessories'));
 });
 
 // Public landing page (direct link)
 Route::get('/landing', function () {
-    $featuredUnits = UnitPS::whereNotNull('foto')->where('foto', '!=', '')->inRandomOrder()->limit(3)->get();
-    return view('landing', compact('featuredUnits'));
+    $featuredUnits = UnitPS::whereNotNull('foto')->where('foto', '!=', '')->inRandomOrder()->limit(6)->get();
+    $featuredGames = Game::whereNotNull('gambar')->where('gambar', '!=', '')->inRandomOrder()->limit(6)->get();
+    $featuredAccessories = Accessory::whereNotNull('gambar')->where('gambar', '!=', '')->inRandomOrder()->limit(6)->get();
+    return view('landing', compact('featuredUnits', 'featuredGames', 'featuredAccessories'));
 })->name('landing');
 
 // Guest Pages
@@ -188,6 +196,7 @@ Route::middleware(['web', 'auth', 'can:access-pemilik'])->prefix('pemilik')->nam
     Route::get('status-produk', [StatusProdukController::class, 'index'])->name('status_produk');
     Route::get('laporan-transaksi', [LaporanController::class, 'index'])->name('laporan_transaksi');
     Route::get('laporan-pendapatan', [LaporanController::class, 'pendapatan'])->name('laporan_pendapatan');
+    Route::get('laporan-pendapatan/export', [LaporanController::class, 'exportPendapatan'])->name('laporan_pendapatan.export');
     Route::get('laporan/export', [LaporanController::class, 'export'])->name('laporan.export');
 });
 
