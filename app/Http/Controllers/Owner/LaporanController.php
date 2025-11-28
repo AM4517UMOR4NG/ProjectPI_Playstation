@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\Rental;
 use Maatwebsite\Excel\Facades\Excel;
+
 use App\Exports\RentalExport;
+use App\Exports\RevenueExport;
 
 class LaporanController extends Controller
 {
@@ -104,5 +106,14 @@ class LaporanController extends Controller
         $dari = $request->input('dari');
         $sampai = $request->input('sampai');
         return Excel::download(new \App\Exports\RentalExport($dari, $sampai), 'laporan_transaksi.' . $format);
+    }
+
+    public function exportPendapatan(Request $request)
+    {
+        Gate::authorize('access-pemilik');
+        $dari = $request->input('dari');
+        $sampai = $request->input('sampai');
+        
+        return Excel::download(new RevenueExport($dari, $sampai), 'laporan_pendapatan.xlsx');
     }
 }
