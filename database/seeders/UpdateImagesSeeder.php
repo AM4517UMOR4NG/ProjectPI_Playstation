@@ -32,8 +32,14 @@ class UpdateImagesSeeder extends Seeder
         }
 
         // Explicitly update PS3 Super Slim if it exists (handling potential naming variations)
+        // Explicitly update PS3 Super Slim if it exists (handling potential naming variations)
         UnitPS::where('name', 'like', '%PS3 Super Slim%')->update([
             'foto' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQclAoswuAXma-y1k4IoBn29_V8-vghdPOLBg&s'
+        ]);
+
+        // Update Custom Admin Items (Robot/Jokowi)
+        UnitPS::where('nama', 'like', '%Robot%')->orWhere('nama', 'like', '%Jokowi%')->update([
+            'foto' => 'https://images.unsplash.com/photo-1486401899868-0e435ed85128?auto=format&fit=crop&w=800&q=80'
         ]);
 
         // Update Game Images
@@ -56,6 +62,11 @@ class UpdateImagesSeeder extends Seeder
             Game::where('judul', 'like', '%' . $title . '%')->update(['gambar' => $url]);
         }
 
+        // Update Custom Admin Games (Robot/Jokowi)
+        Game::where('judul', 'like', '%Robot%')->orWhere('judul', 'like', '%Jokowi%')->update([
+            'gambar' => 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800&q=80'
+        ]);
+
         // Update Accessory Images
         $accessories = [
             'DualSense' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwxxvgs4i0cD8b5GoCBe5OoFkDh7FzoRjTmQ&s',
@@ -73,5 +84,10 @@ class UpdateImagesSeeder extends Seeder
         foreach ($accessories as $keyword => $url) {
             Accessory::where('nama', 'like', '%' . $keyword . '%')->update(['gambar' => $url]);
         }
+
+        // Update Custom Admin Accessories (Robot/Jokowi)
+        Accessory::where('nama', 'like', '%Robot%')->orWhere('nama', 'like', '%Jokowi%')->update([
+            'gambar' => 'https://images.unsplash.com/photo-1593118247619-e2d6f056869e?auto=format&fit=crop&w=800&q=80'
+        ]);
     }
 }
