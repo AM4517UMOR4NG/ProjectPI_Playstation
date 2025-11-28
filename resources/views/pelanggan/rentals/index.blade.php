@@ -128,9 +128,22 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('pelanggan.rentals.show', $rental) }}" class="btn btn-sm btn-info text-white">
-                                    <i class="bi bi-eye me-1"></i> Detail
-                                </a>
+                                <div class="d-flex gap-1">
+                                    <a href="{{ route('pelanggan.rentals.show', $rental) }}" class="btn btn-sm btn-info text-white">
+                                        <i class="bi bi-eye me-1"></i> Detail
+                                    </a>
+                                    @if($rental->status === 'pending')
+                                        @php
+                                            $pendingPayment = $rental->payments->where('transaction_status', 'pending')->first();
+                                            $canResume = $pendingPayment && $pendingPayment->canResume();
+                                        @endphp
+                                        @if($canResume)
+                                            <a href="{{ route('pelanggan.rentals.pay', $rental) }}" class="btn btn-sm btn-success">
+                                                <i class="bi bi-credit-card me-1"></i> Bayar
+                                            </a>
+                                        @endif
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @empty
