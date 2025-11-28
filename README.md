@@ -71,6 +71,11 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ### 🎭 Role-Based Access Control
 - **Admin**: Full control over the system, including user management, inventory, and financial reporting.
+
+
+
+
+
 - **Kasir (Cashier)**: Dedicated interface for processing rentals, managing transactions, and viewing daily shifts.
 - **Pelanggan (Customer)**: User-friendly portal to browse available units, view rental history, and make bookings.
 
