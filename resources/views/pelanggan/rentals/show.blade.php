@@ -145,8 +145,49 @@
                     @endif
 
                     @if($rental->status === 'pending' && $rental->payments->count() > 0)
+                        @php
+                            $pendingPayment = $rental->payments->where('transaction_status', 'pending')->first();
+                            $canResume = $pendingPayment && $pendingPayment->canResume();
+                            $expiresAt = $pendingPayment?->snap_token_expires_at;
+                        @endphp
+                        
                         <div class="mt-4">
-                            <button id="check-payment-btn" class="btn btn-primary w-100 fw-bold" data-order-id="{{ $rental->payments->first()->order_id }}">
+                            @if($canResume)
+                                <!-- Resume Payment Button -->
+                                <a href="{{ route('pelanggan.rentals.pay', $rental) }}" class="btn btn-success btn-lg w-100 fw-bold mb-3">
+                                    <i class="bi bi-credit-card me-2"></i> Lanjutkan Pembayaran
+                                </a>
+                                
+                                @if($expiresAt)
+                                    <div class="alert alert-warning border-0 bg-warning-subtle text-warning mb-3">
+                                        <i class="bi bi-clock me-2"></i>
+                                        <strong>Batas Waktu Pembayaran:</strong><br>
+                                        <span class="fs-5">{{ $expiresAt->format('d M Y, H:i') }} WIB</span>
+                                        <br>
+                                        <small class="text-muted">({{ $expiresAt->diffForHumans() }})</small>
+                                    </div>
+                                @endif
+                                
+                                <div class="alert alert-info border-0 bg-info-subtle text-info mb-3">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    <strong>Cara Pembayaran:</strong>
+                                    <ol class="mb-0 mt-2 ps-3">
+                                        <li>Klik tombol "Lanjutkan Pembayaran" di atas</li>
+                                        <li>Pilih metode pembayaran (QRIS, Transfer Bank, E-Wallet, dll)</li>
+                                        <li>Ikuti instruksi pembayaran yang muncul</li>
+                                        <li>Selesaikan pembayaran sebelum batas waktu</li>
+                                    </ol>
+                                </div>
+                            @else
+                                <div class="alert alert-danger border-0 bg-danger-subtle text-danger mb-3">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>
+                                    <strong>Token Pembayaran Kadaluarsa</strong><br>
+                                    <small>Silakan hubungi admin untuk membuat pesanan baru.</small>
+                                </div>
+                            @endif
+                            
+                            <!-- Check Payment Status Button -->
+                            <button id="check-payment-btn" class="btn btn-outline-primary w-100 fw-bold" data-order-id="{{ $rental->payments->first()->order_id }}">
                                 <i class="bi bi-arrow-clockwise me-2"></i> Cek Status Pembayaran
                             </button>
                             <div class="text-muted small mt-2 text-center">
