@@ -32,6 +32,110 @@
             --sidebar-width: 260px;
             --sidebar-collapsed-width: 80px;
             --header-height: 70px;
+            --sidebar-width: 260px;
+            --sidebar-collapsed-width: 80px;
+            --header-height: 70px;
+        }
+
+        /* Light Mode Palette */
+        body.light-mode {
+            --bg-dark: #f1f5f9;       /* Slate 100 */
+            --sidebar-bg: #155DFC;    /* Custom Blue #155DFC */
+            --card-bg: #ffffff;       /* White */
+            --card-border: #e2e8f0;   /* Slate 200 */
+            
+            --text-main: #0f172a;     /* Slate 900 */
+            --text-muted: #64748b;    /* Slate 500 */
+            --text-dim: #94a3b8;      /* Slate 400 */
+        }
+
+        /* Sidebar Light Mode Overrides */
+        body.light-mode .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        body.light-mode .sidebar .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        body.light-mode .sidebar .nav-link.active {
+            color: #155DFC;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode .sidebar-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        body.light-mode .logo-text {
+            color: #ffffff;
+        }
+        
+        body.light-mode .sidebar-heading {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Global Blue Overrides for Light Mode */
+        body.light-mode .logo-icon,
+        body.light-mode .bg-primary,
+        body.light-mode .btn-primary {
+            background: #155DFC !important;
+            border-color: #155DFC !important;
+            box-shadow: none !important;
+        }
+        
+        body.light-mode .text-primary {
+            color: #155DFC !important;
+        }
+
+        body.light-mode .nav-link:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--primary);
+        }
+
+        body.light-mode .top-navbar {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        body.light-mode .toggle-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode .card-header {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        body.light-mode .table th {
+            background: rgba(0, 0, 0, 0.02);
+            color: var(--text-main);
+        }
+
+        body.light-mode .table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        body.light-mode .form-control, 
+        body.light-mode .form-select {
+            background-color: #ffffff;
+            color: var(--text-main);
+        }
+
+        body.light-mode .form-control:focus, 
+        body.light-mode .form-select:focus {
+            background-color: #ffffff;
+        }
+
+        body.light-mode .input-group-text {
+            background-color: #f8fafc;
+        }
+        
+        /* Light Mode Badge Overrides */
+        body.light-mode .badge.bg-dark {
+            background-color: #475569 !important;
+            color: #f8fafc !important;
         }
 
         body {
@@ -537,6 +641,9 @@
                 <i class="bi bi-list"></i>
             </button>
             <h5 class="m-0 fw-semibold d-none d-md-block">@yield('header_title', 'Dashboard')</h5>
+            <button class="toggle-btn ms-2" id="themeToggle" title="Toggle Theme">
+                <i class="bi bi-moon-fill"></i>
+            </button>
         </div>
         
         <div class="d-flex align-items-center gap-3">
@@ -633,6 +740,32 @@
                 } else {
                     sidebar.classList.remove('collapsed');
                     topNavbar.style.left = '0';
+                }
+            });
+
+
+            // Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+
+            // Check local storage for theme
+            if (localStorage.getItem('theme') === 'light') {
+                body.classList.add('light-mode');
+                themeIcon.classList.remove('bi-moon-fill');
+                themeIcon.classList.add('bi-sun-fill');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                
+                if (body.classList.contains('light-mode')) {
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.classList.remove('bi-moon-fill');
+                    themeIcon.classList.add('bi-sun-fill');
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.classList.remove('bi-sun-fill');
+                    themeIcon.classList.add('bi-moon-fill');
                 }
             });
         });
