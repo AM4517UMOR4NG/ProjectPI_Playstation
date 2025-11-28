@@ -97,11 +97,29 @@
         }
 
         body.light-mode .top-navbar {
-            background: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(135deg, #155DFC 0%, #3b82f6 100%) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        body.light-mode .top-navbar .header-title,
+        body.light-mode .top-navbar .toggle-btn,
+        body.light-mode .top-navbar .dropdown-toggle,
+        body.light-mode .top-navbar .user-name,
+        body.light-mode .top-navbar .bi {
+            color: #ffffff !important;
         }
         
         body.light-mode .toggle-btn:hover {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        body.light-mode .top-navbar #themeToggle {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        body.light-mode .top-navbar #themeToggle:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
 
         body.light-mode .card-header {
@@ -136,6 +154,51 @@
         body.light-mode .badge.bg-dark {
             background-color: #475569 !important;
             color: #f8fafc !important;
+        }
+        
+        /* Light Mode - Dashboard Cards (Katalog) */
+        body.light-mode .dash-card {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode .dash-frame {
+            background: linear-gradient(135deg, #155DFC 0%, #3b82f6 100%) !important;
+            border: 2px solid #dbeafe !important;
+        }
+        
+        body.light-mode .dash-card .card-content {
+            background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%) !important;
+        }
+        
+        body.light-mode .dash-card h5,
+        body.light-mode .dash-card .text-white {
+            color: #0f172a !important;
+        }
+        
+        body.light-mode .text-price {
+            color: #155DFC !important;
+            text-shadow: none !important;
+        }
+        
+        body.light-mode .badge-stock {
+            background: rgba(21, 93, 252, 0.15) !important;
+            color: #155DFC !important;
+            border: 1px solid rgba(21, 93, 252, 0.3) !important;
+        }
+        
+        body.light-mode .btn-cta {
+            background: linear-gradient(135deg, #155DFC, #3b82f6) !important;
+        }
+        
+        body.light-mode .dash-hero p {
+            color: #64748b !important;
+        }
+        
+        body.light-mode section h3.text-white,
+        body.light-mode .section-header h3 {
+            color: #0f172a !important;
         }
 
         body {
