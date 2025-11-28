@@ -306,6 +306,204 @@
             background-color: #155DFC;
             border-color: #155DFC;
         }
+        
+        /* Light Mode - Table Styles */
+        body.light-mode .table {
+            background: #ffffff;
+            color: #0f172a;
+        }
+        
+        body.light-mode .table thead {
+            background: #f8fafc;
+        }
+        
+        body.light-mode .table thead th {
+            background: #f1f5f9 !important;
+            color: #0f172a !important;
+            border-bottom: 2px solid #e2e8f0 !important;
+            font-weight: 600;
+        }
+        
+        body.light-mode .table tbody tr {
+            border-color: #e2e8f0;
+        }
+        
+        body.light-mode .table tbody tr:hover {
+            background-color: #f8fafc !important;
+        }
+        
+        body.light-mode .table td {
+            color: #334155 !important;
+            border-color: #e2e8f0 !important;
+        }
+        
+        body.light-mode .table-responsive {
+            background: #ffffff;
+            border-radius: 0.5rem;
+        }
+        
+        /* Light Mode - Stats Cards with Gradient (keep white text) */
+        body.light-mode .card[style*="background: linear-gradient"] h3,
+        body.light-mode .card[style*="background: linear-gradient"] .fw-bold,
+        body.light-mode .card[style*="background: linear-gradient"] small,
+        body.light-mode .card[style*="background: linear-gradient"] p,
+        body.light-mode .card[style*="background: linear-gradient"] span,
+        body.light-mode [style*="background: linear-gradient"] h3,
+        body.light-mode [style*="background: linear-gradient"] .fw-bold,
+        body.light-mode [style*="background: linear-gradient"] small {
+            color: #ffffff !important;
+        }
+        
+        body.light-mode .card[style*="background: linear-gradient"] .opacity-75 {
+            color: rgba(255, 255, 255, 0.85) !important;
+        }
+        
+        /* Light Mode - Colored stat cards should keep white text */
+        body.light-mode .bg-danger,
+        body.light-mode .bg-primary,
+        body.light-mode .bg-success,
+        body.light-mode .bg-warning,
+        body.light-mode .bg-info {
+            color: #ffffff !important;
+        }
+        
+        body.light-mode .bg-danger h3,
+        body.light-mode .bg-primary h3,
+        body.light-mode .bg-success h3,
+        body.light-mode .bg-warning h3,
+        body.light-mode .bg-info h3,
+        body.light-mode .bg-danger .fw-bold,
+        body.light-mode .bg-primary .fw-bold,
+        body.light-mode .bg-success .fw-bold {
+            color: #ffffff !important;
+        }
+        
+        /* Light Mode - Opacity backgrounds */
+        body.light-mode .bg-danger.bg-opacity-25,
+        body.light-mode .bg-primary.bg-opacity-25,
+        body.light-mode .bg-success.bg-opacity-25,
+        body.light-mode .bg-warning.bg-opacity-25,
+        body.light-mode .bg-info.bg-opacity-25 {
+            background-color: rgba(var(--bs-danger-rgb), 0.15) !important;
+        }
+        
+        body.light-mode .bg-danger.bg-opacity-25 h3,
+        body.light-mode .bg-danger.bg-opacity-25 .fw-bold {
+            color: #dc2626 !important;
+        }
+        
+        body.light-mode .bg-primary.bg-opacity-25 h3,
+        body.light-mode .bg-primary.bg-opacity-25 .fw-bold {
+            color: #155DFC !important;
+        }
+        
+        body.light-mode .bg-warning.bg-opacity-25 h3,
+        body.light-mode .bg-warning.bg-opacity-25 .fw-bold {
+            color: #d97706 !important;
+        }
+        
+        body.light-mode .bg-info.bg-opacity-25 h3,
+        body.light-mode .bg-info.bg-opacity-25 .fw-bold {
+            color: #0891b2 !important;
+        }
+        
+        body.light-mode .bg-success.bg-opacity-25 h3,
+        body.light-mode .bg-success.bg-opacity-25 .fw-bold {
+            color: #16a34a !important;
+        }
+        
+        /* Light Mode - Card with colored backgrounds keep white text */
+        body.light-mode .card.bg-danger,
+        body.light-mode .card.bg-primary,
+        body.light-mode .card.bg-success,
+        body.light-mode .card.bg-info,
+        body.light-mode .card.bg-warning {
+            color: #ffffff !important;
+        }
+        
+        body.light-mode .card.bg-danger *,
+        body.light-mode .card.bg-primary *,
+        body.light-mode .card.bg-success *,
+        body.light-mode .card.bg-info * {
+            color: #ffffff !important;
+        }
+        
+        /* Light Mode - Alert styles */
+        body.light-mode .alert {
+            border-width: 1px;
+        }
+        
+        body.light-mode .alert-info {
+            background-color: #dbeafe !important;
+            border-color: #93c5fd !important;
+            color: #1e40af !important;
+        }
+        
+        body.light-mode .alert-success {
+            background-color: #dcfce7 !important;
+            border-color: #86efac !important;
+            color: #166534 !important;
+        }
+        
+        body.light-mode .alert-warning {
+            background-color: #fef3c7 !important;
+            border-color: #fcd34d !important;
+            color: #92400e !important;
+        }
+        
+        body.light-mode .alert-danger {
+            background-color: #fee2e2 !important;
+            border-color: #fca5a5 !important;
+            color: #991b1b !important;
+        }
+        
+        /* Light Mode - Code/monospace */
+        body.light-mode code {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* Light Mode - Small text */
+        body.light-mode small,
+        body.light-mode .small {
+            color: #64748b !important;
+        }
+        
+        /* Light Mode - Border colors */
+        body.light-mode .border-0 {
+            border-color: transparent !important;
+        }
+        
+        body.light-mode .shadow-sm {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        /* Light Mode - Card header with opacity */
+        body.light-mode .card-header.bg-danger.bg-opacity-10,
+        body.light-mode .card-header.bg-warning.bg-opacity-10,
+        body.light-mode .card-header.bg-info.bg-opacity-10,
+        body.light-mode .card-header.bg-secondary.bg-opacity-10 {
+            background-color: #f8fafc !important;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        body.light-mode .card-header h5 {
+            color: #0f172a !important;
+        }
+        
+        /* Light Mode - Main content area */
+        body.light-mode .main-content {
+            background-color: #f1f5f9;
+        }
+        
+        /* Light Mode - Grid background */
+        body.light-mode .bg-grid {
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        }
 
         body {
             background-color: var(--bg-dark);

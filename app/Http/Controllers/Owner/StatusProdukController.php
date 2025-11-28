@@ -108,28 +108,46 @@ class StatusProdukController extends Controller
     {
         Gate::authorize('access-pemilik');
         
-        // Get all damaged items
+        // Get all damaged items from kondisi field
         $damagedUnits = UnitPS::where('kondisi', 'rusak')->orderBy('updated_at', 'desc')->get();
         $damagedGames = Game::where('kondisi', 'rusak')->orderBy('updated_at', 'desc')->get();
         $damagedAccessories = Accessory::where('kondisi', 'rusak')->orderBy('updated_at', 'desc')->get();
         
-        // Get items with kondisi_kembali = rusak from rental items
-        $damagedFromRentals = RentalItem::with(['rental.customer', 'rentable'])
+        // Get items with kondisi_kembali = rusak from rental items (grouped by type)
+        $damagedUnitsFromRentals = RentalItem::with(['rental.customer', 'rentable'])
+            ->where('rentable_type', UnitPS::class)
+            ->where('kondisi_kembali', 'rusak')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+            
+        $damagedGamesFromRentals = RentalItem::with(['rental.customer', 'rentable'])
+            ->where('rentable_type', Game::class)
+            ->where('kondisi_kembali', 'rusak')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+            
+        $damagedAccessoriesFromRentals = RentalItem::with(['rental.customer', 'rentable'])
+            ->where('rentable_type', Accessory::class)
             ->where('kondisi_kembali', 'rusak')
             ->orderBy('updated_at', 'desc')
             ->get();
         
+        // Calculate totals (from kondisi field + from rental returns)
+        $totalUnits = $damagedUnits->count() + $damagedUnitsFromRentals->count();
+        $totalGames = $damagedGames->count() + $damagedGamesFromRentals->count();
+        $totalAccessories = $damagedAccessories->count() + $damagedAccessoriesFromRentals->count();
+        
         $stats = [
-            'units' => $damagedUnits->count(),
-            'games' => $damagedGames->count(),
-            'accessories' => $damagedAccessories->count(),
-            'from_rentals' => $damagedFromRentals->count(),
-            'total' => $damagedUnits->count() + $damagedGames->count() + $damagedAccessories->count(),
+            'units' => $totalUnits,
+            'games' => $totalGames,
+            'accessories' => $totalAccessories,
+            'total' => $totalUnits + $totalGames + $totalAccessories,
         ];
         
         return view('owner.damaged_items', compact(
             'damagedUnits', 'damagedGames', 'damagedAccessories', 
-            'damagedFromRentals', 'stats'
+            'damagedUnitsFromRentals', 'damagedGamesFromRentals', 'damagedAccessoriesFromRentals',
+            'stats'
         ));
     }
 
