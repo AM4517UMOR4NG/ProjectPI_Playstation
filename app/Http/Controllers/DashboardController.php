@@ -295,9 +295,9 @@ class DashboardController extends Controller
 
         // Ringkasan transaksi
         $rentalsTotal = Rental::count();
-        $rentalsTotal = Rental::count();
         $rentalsActive = Rental::whereIn('status', ['sedang_disewa', 'menunggu_konfirmasi'])->count();
         $rentalsReturned = Rental::where('status', 'selesai')->count();
+        $rentalsCancelled = Rental::where('status', 'cancelled')->count();
 
         // Pembayaran terakhir - gunakan eager loading terbatas
         $latestPayments = Payment::with(['rental' => function($query) {
@@ -306,11 +306,18 @@ class DashboardController extends Controller
             ->orderByDesc('paid_at')
             ->limit(10)
             ->get();
+            
+        // Transaksi dibatalkan terbaru
+        $cancelledRentals = Rental::with('customer')
+            ->where('status', 'cancelled')
+            ->orderByDesc('updated_at')
+            ->limit(5)
+            ->get();
 
         return view('admin.laporan.index', compact(
             'revenueTotal', 'revenueToday', 'revenueMonth',
-            'rentalsTotal', 'rentalsActive', 'rentalsReturned',
-            'latestPayments'
+            'rentalsTotal', 'rentalsActive', 'rentalsReturned', 'rentalsCancelled',
+            'latestPayments', 'cancelledRentals'
         ));
     }
 }

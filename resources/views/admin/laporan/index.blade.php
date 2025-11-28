@@ -64,7 +64,7 @@
 
         <!-- Transaction Stats Cards -->
         <div class="row g-3 mb-4">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="stat-card animate-slide-up" style="animation-delay: 0.4s">
                     <div class="stat-icon bg-primary-subtle">
                         <i class="bi bi-receipt text-primary"></i>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="stat-card animate-slide-up" style="animation-delay: 0.5s">
                     <div class="stat-icon bg-warning-subtle">
                         <i class="bi bi-hourglass-split text-warning"></i>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="stat-card animate-slide-up" style="animation-delay: 0.6s">
                     <div class="stat-icon bg-success-subtle">
                         <i class="bi bi-check-circle text-success"></i>
@@ -94,6 +94,17 @@
                     <div class="stat-info">
                         <div class="stat-label">Transaksi Selesai</div>
                         <div class="stat-number">{{ $rentalsReturned ?? 0 }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card animate-slide-up" style="animation-delay: 0.7s">
+                    <div class="stat-icon bg-danger-subtle">
+                        <i class="bi bi-x-circle text-danger"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Transaksi Dibatalkan</div>
+                        <div class="stat-number">{{ $rentalsCancelled ?? 0 }}</div>
                     </div>
                 </div>
             </div>
@@ -177,6 +188,62 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Cancelled Transactions Table -->
+        @if(($rentalsCancelled ?? 0) > 0)
+        <div class="card premium-table-card animate-slide-up mt-4" style="animation-delay: 0.9s">
+            <div class="card-body p-0">
+                <div class="table-header" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);">
+                    <h6 class="mb-0 fw-bold">
+                        <i class="bi bi-x-circle me-2 text-danger"></i>
+                        Transaksi Dibatalkan
+                    </h6>
+                    <span class="badge bg-danger-subtle text-danger">{{ $rentalsCancelled ?? 0 }} Transaksi</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0 premium-table">
+                        <thead>
+                            <tr>
+                                <th><i class="bi bi-hash me-2"></i>Kode</th>
+                                <th><i class="bi bi-person me-2"></i>Pelanggan</th>
+                                <th><i class="bi bi-calendar3 me-2"></i>Tanggal</th>
+                                <th class="text-end"><i class="bi bi-currency-dollar me-2"></i>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse(($cancelledRentals ?? []) as $rental)
+                            <tr>
+                                <td>
+                                    <code class="bg-danger-subtle text-danger px-2 py-1 rounded">{{ $rental->kode }}</code>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="avatar-sm" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                            {{ substr($rental->customer->name ?? 'U', 0, 1) }}
+                                        </div>
+                                        <span class="text-light fw-medium">{{ $rental->customer->name ?? '-' }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="text-light">{{ $rental->updated_at->format('d M Y H:i') }}</span>
+                                </td>
+                                <td class="text-end">
+                                    <span class="text-danger fw-bold">Rp {{ number_format($rental->total ?? 0, 0, ',', '.') }}</span>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="4" class="text-center py-4 text-muted">
+                                    Tidak ada transaksi dibatalkan
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 @endsection
 
