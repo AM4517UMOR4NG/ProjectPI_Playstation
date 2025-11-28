@@ -558,6 +558,91 @@
             gap: 1rem;
         }
     }
+    
+    /* ========== LIGHT MODE FIXES ========== */
+    body.light-mode .premium-metric::before {
+        opacity: 1;
+    }
+    
+    body.light-mode .metric-label,
+    body.light-mode .metric-value,
+    body.light-mode .metric-trend,
+    body.light-mode .metric-trend span,
+    body.light-mode .metric-icon {
+        color: #ffffff !important;
+    }
+    
+    body.light-mode .stat-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+    }
+    
+    body.light-mode .stat-label {
+        color: #64748b !important;
+    }
+    
+    body.light-mode .stat-number {
+        color: #0f172a !important;
+    }
+    
+    body.light-mode .premium-table-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+    }
+    
+    body.light-mode .table-header {
+        background: #f8fafc !important;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    body.light-mode .table-header h6 {
+        color: #0f172a !important;
+    }
+    
+    body.light-mode .premium-table thead th {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+    }
+    
+    body.light-mode .premium-table tbody td {
+        color: #334155 !important;
+        border-bottom-color: #e2e8f0 !important;
+    }
+    
+    body.light-mode .premium-table tbody tr:hover {
+        background: #f8fafc !important;
+    }
+    
+    body.light-mode .text-light {
+        color: #1e293b !important;
+    }
+    
+    body.light-mode .date-badge {
+        background: rgba(21, 93, 252, 0.1);
+    }
+    
+    body.light-mode .date-badge i {
+        color: #155DFC !important;
+    }
+    
+    body.light-mode .avatar-sm {
+        color: #ffffff !important;
+    }
+    
+    body.light-mode .method-badge {
+        background: rgba(21, 93, 252, 0.1) !important;
+        color: #155DFC !important;
+        border-color: rgba(21, 93, 252, 0.3) !important;
+    }
+    
+    body.light-mode .amount-text {
+        color: #059669 !important;
+    }
+    
+    body.light-mode .gradient-text {
+        background: linear-gradient(135deg, #155DFC 0%, #3b82f6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 </style>
 @endpush
-```
