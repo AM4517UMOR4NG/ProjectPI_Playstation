@@ -202,6 +202,342 @@
     .tooltip.bs-tooltip-end .tooltip-arrow::before {
         border-right-color: #1e293b;
     }
+
+    /* ========================================
+       LIGHT MODE STYLES FOR PELANGGAN
+       ======================================== */
+    
+    /* Card Styles */
+    body.light-mode .card {
+        background: #ffffff;
+        border-color: #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    body.light-mode .card::before {
+        background: linear-gradient(90deg, transparent, rgba(21, 93, 252, 0.08), transparent);
+    }
+    
+    body.light-mode .card-hover-lift:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(21, 93, 252, 0.15);
+    }
+    
+    body.light-mode .card-body {
+        background: transparent;
+    }
+    
+    /* Glass Card Light Mode */
+    body.light-mode .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: #e2e8f0;
+    }
+    
+    /* Text Colors */
+    body.light-mode .text-white {
+        color: #0f172a !important;
+    }
+    
+    body.light-mode .text-muted {
+        color: #64748b !important;
+    }
+    
+    body.light-mode .text-secondary {
+        color: #475569 !important;
+    }
+    
+    body.light-mode h1, 
+    body.light-mode h2, 
+    body.light-mode h3, 
+    body.light-mode h4, 
+    body.light-mode h5, 
+    body.light-mode h6 {
+        color: #0f172a;
+    }
+    
+    body.light-mode p,
+    body.light-mode span:not(.badge),
+    body.light-mode div:not(.badge):not(.alert) {
+        color: #334155;
+    }
+    
+    /* Gradient Text Light Mode */
+    body.light-mode .gradient-text {
+        background: linear-gradient(135deg, #155DFC, #7c3aed);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    /* Table Styles */
+    body.light-mode .table {
+        color: #0f172a;
+    }
+    
+    body.light-mode .table thead th {
+        background: #f8fafc;
+        color: #0f172a;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    
+    body.light-mode .table tbody tr {
+        border-color: #e2e8f0;
+    }
+    
+    body.light-mode .table tbody tr:hover {
+        background-color: rgba(21, 93, 252, 0.05);
+    }
+    
+    body.light-mode .table td {
+        color: #334155;
+        border-color: #e2e8f0;
+    }
+    
+    /* Form Controls */
+    body.light-mode .form-control,
+    body.light-mode .form-select {
+        background-color: #ffffff;
+        border-color: #cbd5e1;
+        color: #0f172a;
+    }
+    
+    body.light-mode .form-control::placeholder {
+        color: #94a3b8;
+    }
+    
+    body.light-mode .form-control:focus,
+    body.light-mode .form-select:focus {
+        background-color: #ffffff;
+        border-color: #155DFC;
+        box-shadow: 0 0 0 3px rgba(21, 93, 252, 0.15);
+    }
+    
+    body.light-mode .input-group-text {
+        background-color: #f1f5f9;
+        border-color: #cbd5e1;
+        color: #64748b;
+    }
+    
+    body.light-mode .form-label {
+        color: #334155;
+    }
+    
+    /* Badge Styles */
+    body.light-mode .badge.bg-secondary-subtle {
+        background-color: #f1f5f9 !important;
+        color: #475569 !important;
+    }
+    
+    body.light-mode .badge.bg-success-subtle {
+        background-color: #dcfce7 !important;
+        color: #166534 !important;
+    }
+    
+    body.light-mode .badge.bg-warning-subtle {
+        background-color: #fef3c7 !important;
+        color: #92400e !important;
+    }
+    
+    body.light-mode .badge.bg-danger-subtle {
+        background-color: #fee2e2 !important;
+        color: #991b1b !important;
+    }
+    
+    body.light-mode .badge.bg-info-subtle {
+        background-color: #dbeafe !important;
+        color: #1e40af !important;
+    }
+    
+    body.light-mode .badge.bg-primary-subtle {
+        background-color: #dbeafe !important;
+        color: #1e40af !important;
+    }
+    
+    /* Alert Styles */
+    body.light-mode .alert {
+        border-width: 1px;
+    }
+    
+    body.light-mode .alert-success,
+    body.light-mode .alert.bg-success-subtle {
+        background-color: #dcfce7 !important;
+        border-color: #86efac !important;
+        color: #166534 !important;
+    }
+    
+    body.light-mode .alert-warning,
+    body.light-mode .alert.bg-warning-subtle {
+        background-color: #fef3c7 !important;
+        border-color: #fcd34d !important;
+        color: #92400e !important;
+    }
+    
+    body.light-mode .alert-danger,
+    body.light-mode .alert.bg-danger-subtle {
+        background-color: #fee2e2 !important;
+        border-color: #fca5a5 !important;
+        color: #991b1b !important;
+    }
+    
+    body.light-mode .alert-info,
+    body.light-mode .alert.bg-info-subtle {
+        background-color: #dbeafe !important;
+        border-color: #93c5fd !important;
+        color: #1e40af !important;
+    }
+    
+    /* Button Styles */
+    body.light-mode .btn-primary {
+        background-color: #155DFC;
+        border-color: #155DFC;
+    }
+    
+    body.light-mode .btn-primary:hover {
+        background-color: #1249cc;
+        border-color: #1249cc;
+    }
+    
+    body.light-mode .btn-outline-secondary {
+        border-color: #cbd5e1;
+        color: #475569;
+    }
+    
+    body.light-mode .btn-outline-secondary:hover {
+        background-color: #f1f5f9;
+        border-color: #94a3b8;
+        color: #334155;
+    }
+    
+    body.light-mode .btn-outline-primary {
+        border-color: #155DFC;
+        color: #155DFC;
+    }
+    
+    body.light-mode .btn-outline-primary:hover {
+        background-color: #155DFC;
+        color: #ffffff;
+    }
+    
+    body.light-mode .btn-info {
+        background-color: #0ea5e9;
+        border-color: #0ea5e9;
+    }
+    
+    body.light-mode .btn-success {
+        background-color: #22c55e;
+        border-color: #22c55e;
+    }
+    
+    /* Border Colors */
+    body.light-mode .border-secondary {
+        border-color: #e2e8f0 !important;
+    }
+    
+    body.light-mode .border-bottom {
+        border-color: #e2e8f0 !important;
+    }
+    
+    /* Background Colors */
+    body.light-mode .bg-dark {
+        background-color: #f1f5f9 !important;
+    }
+    
+    body.light-mode .bg-secondary {
+        background-color: #e2e8f0 !important;
+    }
+    
+    /* Tooltip Light Mode */
+    body.light-mode .tooltip-inner {
+        background-color: #1e293b;
+        color: #fff;
+    }
+    
+    /* Font Monospace */
+    body.light-mode .font-monospace {
+        color: #475569;
+    }
+    
+    /* Image Placeholder */
+    body.light-mode .bg-dark.rounded {
+        background-color: #f1f5f9 !important;
+        border-color: #e2e8f0 !important;
+    }
+    
+    /* Pagination */
+    body.light-mode .pagination .page-link {
+        background-color: #ffffff;
+        border-color: #e2e8f0;
+        color: #334155;
+    }
+    
+    body.light-mode .pagination .page-link:hover {
+        background-color: #f1f5f9;
+        border-color: #cbd5e1;
+    }
+    
+    body.light-mode .pagination .page-item.active .page-link {
+        background-color: #155DFC;
+        border-color: #155DFC;
+        color: #ffffff;
+    }
+    
+    body.light-mode .pagination .page-item.disabled .page-link {
+        background-color: #f8fafc;
+        color: #94a3b8;
+    }
+    
+    /* Card Footer */
+    body.light-mode .card-footer {
+        background-color: #f8fafc;
+        border-top-color: #e2e8f0;
+    }
+    
+    /* Specific Icon Colors */
+    body.light-mode .bi.text-primary {
+        color: #155DFC !important;
+    }
+    
+    body.light-mode .bi.text-success {
+        color: #22c55e !important;
+    }
+    
+    body.light-mode .bi.text-warning {
+        color: #f59e0b !important;
+    }
+    
+    body.light-mode .bi.text-danger {
+        color: #ef4444 !important;
+    }
+    
+    body.light-mode .bi.text-info {
+        color: #0ea5e9 !important;
+    }
+    
+    body.light-mode .bi.text-muted {
+        color: #94a3b8 !important;
+    }
+    
+    /* Small Text */
+    body.light-mode small,
+    body.light-mode .small {
+        color: #64748b;
+    }
+    
+    /* FW Bold Text */
+    body.light-mode .fw-bold {
+        color: #0f172a;
+    }
+    
+    body.light-mode .table .fw-bold {
+        color: #0f172a;
+    }
+    
+    /* Specific overrides for rental pages */
+    body.light-mode .card .text-white {
+        color: #0f172a !important;
+    }
+    
+    body.light-mode .card .text-muted.small {
+        color: #64748b !important;
+    }
 </style>
 @endpush
 
