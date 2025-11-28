@@ -17,9 +17,9 @@
             --card-bg: #1e293b;       /* Slate 800 - Solid card background */
             --card-border: #334155;   /* Slate 700 - Visible borders */
             
-            --primary: #6366f1;       /* Indigo 500 - Vibrant primary */
-            --primary-hover: #4f46e5; /* Indigo 600 */
-            --secondary: #06b6d4;     /* Cyan 500 */
+            --primary: #3b82f6;       /* Blue 500 - Consistent blue primary */
+            --primary-hover: #2563eb; /* Blue 600 */
+            --secondary: #60a5fa;     /* Blue 400 - Light blue */
             
             --text-main: #f8fafc;     /* Slate 50 - Almost white for main text */
             --text-muted: #cbd5e1;    /* Slate 300 - Light gray for secondary text */
@@ -29,9 +29,6 @@
             --warning: #eab308;       /* Yellow 500 */
             --danger: #ef4444;        /* Red 500 */
             
-            --sidebar-width: 260px;
-            --sidebar-collapsed-width: 80px;
-            --header-height: 70px;
             --sidebar-width: 260px;
             --sidebar-collapsed-width: 80px;
             --header-height: 70px;
@@ -692,7 +689,7 @@
         .logo-icon {
             min-width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -700,7 +697,7 @@
             color: white;
             font-size: 1.2rem;
             margin-right: 12px;
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
         }
 
         .logo-text {
@@ -747,8 +744,8 @@
 
         .nav-link.active {
             color: #fff;
-            background: var(--primary);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
             font-weight: 600;
         }
 
