@@ -84,15 +84,15 @@
                             <div class="col-7">
                                 @php
                                   $statusBadge = match($rental->status) {
-                                    'pending' => ['class' => 'bg-warning-subtle', 'text' => 'Menunggu Pembayaran'],
-                                    'sedang_disewa' => ['class' => 'bg-success-subtle', 'text' => 'Sedang Disewa'],
-                                    'menunggu_konfirmasi' => ['class' => 'bg-info-subtle', 'text' => 'Menunggu Konfirmasi'],
-                                    'selesai' => ['class' => 'bg-primary-subtle', 'text' => 'Selesai'],
-                                    'cancelled' => ['class' => 'bg-danger-subtle', 'text' => 'Dibatalkan'],
-                                    default => ['class' => 'bg-secondary-subtle', 'text' => ucfirst($rental->status)]
+                                    'pending' => ['class' => 'badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10', 'text' => 'Menunggu Pembayaran'],
+                                    'sedang_disewa' => ['class' => 'badge rounded-pill border border-primary text-primary bg-primary bg-opacity-10', 'text' => 'Sedang Disewa'],
+                                    'menunggu_konfirmasi' => ['class' => 'badge rounded-pill border border-info text-info bg-info bg-opacity-10', 'text' => 'Menunggu Konfirmasi'],
+                                    'selesai' => ['class' => 'badge rounded-pill border border-success text-success bg-success bg-opacity-10', 'text' => 'Selesai'],
+                                    'cancelled' => ['class' => 'badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10', 'text' => 'Dibatalkan'],
+                                    default => ['class' => 'badge rounded-pill border border-secondary text-secondary bg-secondary bg-opacity-10', 'text' => ucfirst($rental->status)]
                                   };
                                 @endphp
-                                <span class="badge {{ $statusBadge['class'] }}">{{ $statusBadge['text'] }}</span>
+                                <span class="{{ $statusBadge['class'] }}">{{ $statusBadge['text'] }}</span>
                             </div>
                         </div>
                     </div>
@@ -109,11 +109,11 @@
                             <div class="col-5 text-muted"><i class="bi bi-credit-card me-1"></i> Status Bayar</div>
                             <div class="col-7">
                                 @if($rental->paid >= $rental->total)
-                                    <span class="badge bg-success-subtle"><i class="bi bi-check-circle-fill me-1"></i> LUNAS</span>
+                                    <span class="badge rounded-pill border border-success text-success bg-success bg-opacity-10"><i class="bi bi-check-circle-fill me-1"></i> LUNAS</span>
                                 @elseif($rental->paid > 0)
-                                    <span class="badge bg-warning-subtle"><i class="bi bi-exclamation-circle-fill me-1"></i> KURANG BAYAR</span>
+                                    <span class="badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10"><i class="bi bi-exclamation-circle-fill me-1"></i> KURANG BAYAR</span>
                                 @else
-                                    <span class="badge bg-danger-subtle"><i class="bi bi-x-circle-fill me-1"></i> BELUM LUNAS</span>
+                                    <span class="badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10"><i class="bi bi-x-circle-fill me-1"></i> BELUM LUNAS</span>
                                 @endif
                             </div>
                         </div>
@@ -319,11 +319,11 @@
                                     $status = $payment->transaction_status ?? 'pending';
                                 @endphp
                                 @if(in_array($status, ['settlement', 'capture']))
-                                    <span class="badge bg-success-subtle"><i class="bi bi-check-circle me-1"></i> Lunas</span>
+                                    <span class="badge rounded-pill border border-success text-success bg-success bg-opacity-10"><i class="bi bi-check-circle me-1"></i> Lunas</span>
                                 @elseif($status == 'pending')
-                                    <span class="badge bg-warning-subtle"><i class="bi bi-hourglass-split me-1"></i> Menunggu</span>
+                                    <span class="badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10"><i class="bi bi-hourglass-split me-1"></i> Menunggu</span>
                                 @else
-                                    <span class="badge bg-secondary-subtle">{{ ucfirst($status) }}</span>
+                                    <span class="badge rounded-pill border border-secondary text-secondary bg-secondary bg-opacity-10">{{ ucfirst($status) }}</span>
                                 @endif
                             </td>
                         </tr>
