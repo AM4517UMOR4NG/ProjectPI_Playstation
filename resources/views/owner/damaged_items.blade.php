@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="fw-bold mb-1"><i class="bi bi-exclamation-triangle text-danger me-2"></i>Item Rusak</h2>
+        <h2 class="fw-bold mb-1"><i class="bi bi-exclamation-triangle me-2"></i>Item Rusak</h2>
         <p class="text-muted mb-0">Daftar item yang dilaporkan rusak oleh kasir</p>
     </div>
     <a href="{{ route('pemilik.status_produk') }}" class="btn btn-outline-primary">
@@ -15,34 +15,34 @@
 <!-- Stats Cards -->
 <div class="row g-3 mb-4">
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);">
+        <div class="card border-0 shadow-sm" style="background: #ffffff; border: 1px solid #e9ecef;">
             <div class="card-body text-center">
-                <h3 class="fw-bold mb-1" style="color: #ffffff !important;">{{ $stats['total'] }}</h3>
-                <small style="color: rgba(255,255,255,0.9) !important;">Total Item Rusak</small>
+                <h3 class="fw-bold mb-1" style="color: #212529 !important;">{{ $stats['total'] }}</h3>
+                <small class="text-muted">Total Item Rusak</small>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);">
+        <div class="card border-0 shadow-sm" style="background: #ffffff; border: 1px solid #e9ecef;">
             <div class="card-body text-center">
-                <h3 class="fw-bold mb-1" style="color: #ffffff !important;">{{ $stats['units'] }}</h3>
-                <small style="color: rgba(255,255,255,0.9) !important;">Unit PS Rusak</small>
+                <h3 class="fw-bold mb-1" style="color: #212529 !important;">{{ $stats['units'] }}</h3>
+                <small class="text-muted">Unit PS Rusak</small>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);">
+        <div class="card border-0 shadow-sm" style="background: #ffffff; border: 1px solid #e9ecef;">
             <div class="card-body text-center">
-                <h3 class="fw-bold mb-1" style="color: #ffffff !important;">{{ $stats['games'] }}</h3>
-                <small style="color: rgba(255,255,255,0.9) !important;">Game Rusak</small>
+                <h3 class="fw-bold mb-1" style="color: #212529 !important;">{{ $stats['games'] }}</h3>
+                <small class="text-muted">Game Rusak</small>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
+        <div class="card border-0 shadow-sm" style="background: #ffffff; border: 1px solid #e9ecef;">
             <div class="card-body text-center">
-                <h3 class="fw-bold mb-1" style="color: #ffffff !important;">{{ $stats['accessories'] }}</h3>
-                <small style="color: rgba(255,255,255,0.9) !important;">Aksesoris Rusak</small>
+                <h3 class="fw-bold mb-1" style="color: #212529 !important;">{{ $stats['accessories'] }}</h3>
+                <small class="text-muted">Aksesoris Rusak</small>
             </div>
         </div>
     </div>
@@ -50,9 +50,9 @@
 
 <!-- ==================== TABEL UNIT PS RUSAK ==================== -->
 <div class="card border-0 shadow-sm mb-4">
-    <div class="card-header border-0 d-flex align-items-center" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);">
-        <i class="bi bi-controller me-2" style="color: #ffffff;"></i>
-        <h5 class="mb-0" style="color: #ffffff;">Unit PS Rusak ({{ $stats['units'] }})</h5>
+    <div class="card-header border-0 d-flex align-items-center bg-light">
+        <i class="bi bi-controller me-2 text-dark"></i>
+        <h5 class="mb-0 text-dark">Unit PS Rusak ({{ $stats['units'] }})</h5>
     </div>
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
@@ -90,9 +90,9 @@
 
 <!-- ==================== TABEL GAME RUSAK ==================== -->
 <div class="card border-0 shadow-sm mb-4">
-    <div class="card-header border-0 d-flex align-items-center" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);">
-        <i class="bi bi-disc me-2" style="color: #ffffff;"></i>
-        <h5 class="mb-0" style="color: #ffffff;">Game Rusak ({{ $stats['games'] }})</h5>
+    <div class="card-header border-0 d-flex align-items-center bg-light">
+        <i class="bi bi-disc me-2 text-dark"></i>
+        <h5 class="mb-0 text-dark">Game Rusak ({{ $stats['games'] }})</h5>
     </div>
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
@@ -130,9 +130,9 @@
 
 <!-- ==================== TABEL AKSESORIS RUSAK ==================== -->
 <div class="card border-0 shadow-sm mb-4">
-    <div class="card-header border-0 d-flex align-items-center" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
-        <i class="bi bi-headset me-2" style="color: #ffffff;"></i>
-        <h5 class="mb-0" style="color: #ffffff;">Aksesoris Rusak ({{ $stats['accessories'] }})</h5>
+    <div class="card-header border-0 d-flex align-items-center bg-light">
+        <i class="bi bi-headset me-2 text-dark"></i>
+        <h5 class="mb-0 text-dark">Aksesoris Rusak ({{ $stats['accessories'] }})</h5>
     </div>
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">

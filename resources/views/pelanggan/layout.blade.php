@@ -2,7 +2,7 @@
 
 @section('title', 'Dashboard Pelanggan')
 
-@section('header_title', 'Area Member')
+@section('header_title', '')
 
 @section('sidebar_menu')
     <a href="{{ route('dashboard.pelanggan') }}" class="nav-link {{ request()->routeIs('dashboard.pelanggan') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Beranda">
@@ -655,6 +655,73 @@
     
     body.light-mode .top-navbar #themeToggle:hover {
         background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ========================================
+       LIGHT MODE - NOTIFICATION FIXES
+       ======================================== */
+    
+    /* SweetAlert2 Fixes */
+    body.light-mode .swal2-popup {
+        background: #ffffff !important;
+        color: #1e293b !important;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+    
+    body.light-mode .swal2-title,
+    body.light-mode .swal2-content,
+    body.light-mode .swal2-html-container {
+        color: #1e293b !important;
+    }
+    
+    body.light-mode .swal2-icon.swal2-success {
+        border-color: #22c55e;
+        color: #22c55e;
+    }
+    
+    body.light-mode .swal2-timer-progress-bar {
+        background: #3b82f6;
+    }
+    
+    /* Bootstrap Toast Fixes */
+    body.light-mode .toast {
+        background-color: #ffffff !important;
+        color: #1e293b !important;
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    body.light-mode .toast-header {
+        background-color: #f8fafc !important;
+        color: #0f172a !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+    }
+    
+    body.light-mode .toast-body {
+        color: #334155 !important;
+    }
+    
+    body.light-mode .btn-close {
+        filter: none !important; /* Ensure close button is visible on light bg */
+    }
+    
+    /* Force white text on primary buttons - BOTH dark and light mode */
+    .btn-primary,
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    body.light-mode .btn-primary,
+    body.light-mode .btn-primary:hover,
+    body.light-mode .btn-primary:focus,
+    body.light-mode .btn-primary:active {
+        color: #ffffff !important;
+    }
+    
+    /* Force white text for all content inside primary buttons */
+    .btn-primary *,
+    body.light-mode .btn-primary * {
+        color: #ffffff !important;
     }
 </style>
 @endpush
