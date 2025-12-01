@@ -22,9 +22,12 @@
     
     .product-card .card-img-wrapper {
         position: relative;
-        height: 200px;
+        height: 220px;
         overflow: hidden;
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .product-card .card-img-wrapper img {
@@ -116,7 +119,7 @@
     }
     
     body.light-mode .product-card .card-img-wrapper {
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
     }
     
     body.light-mode .product-card .card-content {
@@ -138,18 +141,110 @@
     body.light-mode .product-card .product-price span {
         color: #64748b;
     }
+
+    body.light-mode .hero-welcome p {
+        color: #475569;
+    }
+
+    /* Advanced Hero Effects */
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(10deg); }
+        100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    .hero-welcome {
+        background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #0f172a);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    body.light-mode .hero-welcome {
+        background: linear-gradient(-45deg, #eff6ff, #dbeafe, #bfdbfe, #eff6ff);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        border: 1px solid #bfdbfe;
+    }
+
+    .shape {
+        position: absolute;
+        filter: blur(50px);
+        z-index: 0;
+        opacity: 0.6;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .shape-1 {
+        top: -10%;
+        left: -10%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent);
+        animation-delay: 0s;
+    }
+
+    .shape-2 {
+        bottom: -20%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+        animation-delay: -2s;
+    }
+
+    .shape-3 {
+        top: 20%;
+        right: 20%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.4), transparent);
+        animation-delay: -4s;
+    }
+
+    /* Typewriter Cursor */
+    .cursor {
+        display: inline-block;
+        width: 3px;
+        height: 1em;
+        background-color: #fff;
+        animation: blink 1s infinite;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
 </style>
 
 <div class="container-fluid">
     <!-- Hero Section -->
-    <div class="text-center py-5 mb-4 rounded-4 position-relative overflow-hidden" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2)); border: 1px solid var(--card-border);">
+    <!-- Hero Section -->
+    <div class="text-center py-5 mb-4 rounded-4 position-relative overflow-hidden hero-welcome">
+        <!-- Floating Shapes -->
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        
         <div class="position-relative z-1">
-            <h2 class="fw-bold display-5 mb-3 text-white">Selamat Datang, {{ Auth::user()->name }}!</h2>
-            <p class="lead text-muted mb-0" style="max-width: 600px; margin: 0 auto;">
+            <h2 class="fw-bold display-5 mb-3" style="text-shadow: 0 2px 10px rgba(0,0,0,0.1); min-height: 1.2em;">
+                <span id="typewriter"></span><span class="cursor"></span>
+            </h2>
+            <p class="lead mb-0" style="max-width: 600px; margin: 0 auto; text-shadow: 0 1px 5px rgba(0,0,0,0.1);">
                 Temukan pengalaman gaming terbaikmu hari ini. Sewa konsol, game, dan aksesoris dengan mudah dan cepat.
             </p>
         </div>
-        <div class="position-absolute top-0 start-0 w-100 h-100 bg-grid" style="opacity: 0.1;"></div>
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-grid" style="opacity: 0.05;"></div>
     </div>
 
     <!-- Unit PS Section -->
@@ -159,7 +254,7 @@
             <a href="{{ route('pelanggan.unitps.index') }}" class="btn btn-sm btn-outline-light rounded-pill px-3">Lihat Semua</a>
         </div>
         
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
             @forelse($unitps as $unit)
                 <div class="col">
                     <div class="product-card">
@@ -198,7 +293,7 @@
             <a href="{{ route('pelanggan.games.index') }}" class="btn btn-sm btn-outline-light rounded-pill px-3">Lihat Semua</a>
         </div>
         
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
             @forelse($games as $game)
                 <div class="col">
                     <div class="product-card">
@@ -237,7 +332,7 @@
             <a href="{{ route('pelanggan.accessories.index') }}" class="btn btn-sm btn-outline-light rounded-pill px-3">Lihat Semua</a>
         </div>
         
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
             @forelse($accessories as $acc)
                 <div class="col">
                     <div class="product-card">
@@ -269,4 +364,51 @@
         </div>
     </section>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const textElement = document.getElementById('typewriter');
+        const phrases = [
+            "Selamat Datang, {{ Auth::user()->name }}!", 
+            "Sewa Konsol PS5 Murah", 
+            "Main Game Terbaru Hari Ini", 
+            "Upgrade Gear Gaming Kamu",
+            "Rasakan Sensasi Next-Gen"
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500; // Pause before new phrase
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        // Start typing
+        if(textElement) {
+            type();
+        }
+    });
+</script>
 @endsection
