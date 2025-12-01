@@ -4,10 +4,94 @@
 @section('header_title', 'Edit Profil')
 
 @section('content')
+<style>
+    /* Profile Page Light Mode Styles */
+    body.light-mode .profile-container {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Decorative Gradient Blobs */
+    body.light-mode .profile-container::before {
+        content: '';
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 300px;
+        height: 300px;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        filter: blur(80px);
+        border-radius: 50%;
+        z-index: -1;
+        opacity: 0.4;
+        animation: floatBlob 10s infinite alternate;
+    }
+
+    body.light-mode .profile-container::after {
+        content: '';
+        position: absolute;
+        bottom: -40px;
+        left: -40px;
+        width: 250px;
+        height: 250px;
+        background: linear-gradient(135deg, #06b6d4, #3b82f6);
+        filter: blur(80px);
+        border-radius: 50%;
+        z-index: -1;
+        opacity: 0.4;
+        animation: floatBlob 8s infinite alternate-reverse;
+    }
+
+    @keyframes floatBlob {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(20px, 20px); }
+    }
+
+    body.light-mode .profile-card {
+        background: rgba(255, 255, 255, 0.7) !important;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        border-top: 4px solid #3b82f6 !important;
+        box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    body.light-mode .avatar-circle {
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+        box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+        border: 4px solid rgba(255, 255, 255, 0.8);
+    }
+
+    body.light-mode .form-label {
+        color: #334155;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+    }
+
+    body.light-mode .form-control {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-color: #e2e8f0;
+        color: #0f172a;
+        transition: all 0.3s ease;
+    }
+
+    body.light-mode .form-control:focus {
+        background-color: #ffffff;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        transform: translateY(-1px);
+    }
+    
+    body.light-mode .text-muted {
+        color: #64748b !important;
+    }
+</style>
+
 <div class="row justify-content-center">
     <div class="col-lg-8">
-        <div class="card border-0 shadow-sm">
-            <div class="card-body p-4">
+        <div class="profile-container">
+            <div class="card border-0 shadow-sm profile-card">
+                <div class="card-body p-4">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -21,7 +105,7 @@
 
                     <div class="text-center mb-4">
                         <div class="position-relative d-inline-block">
-                            <div id="avatar-preview-container" class="rounded-circle overflow-hidden bg-secondary d-flex align-items-center justify-content-center text-white fw-bold" style="width: 120px; height: 120px; font-size: 3rem;">
+                            <div id="avatar-preview-container" class="rounded-circle overflow-hidden bg-secondary d-flex align-items-center justify-content-center text-white fw-bold avatar-circle" style="width: 120px; height: 120px; font-size: 3rem;">
                                 @if(Auth::user()->avatar)
                                     <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar" class="w-100 h-100 object-fit-cover">
                                 @else
@@ -83,6 +167,7 @@
                     </div>
                 </form>
             </div>
+        </div>
         </div>
     </div>
 </div>

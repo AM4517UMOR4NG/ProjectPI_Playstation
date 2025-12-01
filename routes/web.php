@@ -27,6 +27,7 @@ use App\Http\Controllers\Kasir\TransaksiController;
 use App\Http\Controllers\Admin\ImpersonateController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Models\UnitPS;
 use App\Models\Game;
 use App\Models\Accessory;
@@ -98,6 +99,10 @@ Route::get('/auth', function () {
 })->name('login');
 
 Route::middleware(['web', 'auth'])->group(function () {
+    // Global Semantic Search
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/search/suggestions', [SearchController::class, 'suggestions'])->name('search.suggestions');
+
     // Unified Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
