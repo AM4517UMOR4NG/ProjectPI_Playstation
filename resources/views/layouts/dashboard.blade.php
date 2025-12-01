@@ -48,19 +48,24 @@
 
         /* Sidebar Light Mode Overrides */
         body.light-mode .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
+            color: #ffffff;
             font-weight: 500;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         body.light-mode .sidebar .nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
         }
 
         body.light-mode .sidebar .nav-link.active {
             color: #155DFC;
             background: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            text-shadow: none;
+            font-weight: 700;
         }
         
         body.light-mode .sidebar-header {
@@ -69,14 +74,23 @@
         
         body.light-mode .logo-text {
             color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
         }
         
         body.light-mode .sidebar-heading {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            letter-spacing: 1px;
         }
         
         /* Global Blue Overrides for Light Mode */
-        body.light-mode .logo-icon,
+        body.light-mode .logo-icon {
+            background: #ffffff !important;
+            color: #155DFC !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+        }
+
         body.light-mode .bg-primary,
         body.light-mode .btn-primary {
             background: #155DFC !important;
@@ -101,7 +115,6 @@
         body.light-mode .top-navbar .header-title,
         body.light-mode .top-navbar .toggle-btn,
         body.light-mode .top-navbar .dropdown-toggle,
-        body.light-mode .top-navbar .user-name,
         body.light-mode .top-navbar .bi {
             color: #ffffff !important;
         }
@@ -216,8 +229,38 @@
             color: #334155;
         }
         
+        
         body.light-mode .fw-bold {
             color: #0f172a;
+        }
+        
+        /* Ultra-High Specificity Override for Primary Buttons */
+        html body.light-mode .btn-primary,
+        html body.light-mode .btn-primary:hover,
+        html body.light-mode .btn-primary:focus,
+        html body.light-mode .btn-primary:active,
+        html body.light-mode .btn-primary.fw-bold,
+        html body.light-mode .btn-primary .fw-bold,
+        html body.light-mode .btn-primary *,
+        html body.light-mode .btn-primary.fw-bold * {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important; /* Force for webkit browsers */
+        }
+        
+        /* Fix Dropdown Menu in Light Mode - Keep it dark but ensure text is white */
+        body.light-mode .dropdown-menu-dark {
+            background-color: #1e293b !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        body.light-mode .dropdown-menu-dark .dropdown-header,
+        body.light-mode .dropdown-menu-dark .dropdown-item {
+            color: #e2e8f0 !important; /* Light slate text */
+        }
+        
+        body.light-mode .dropdown-menu-dark .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
         }
         
         body.light-mode .card .text-white {
@@ -226,6 +269,16 @@
         
         body.light-mode .card-header .text-white {
             color: #0f172a !important;
+        }
+        
+        /* Sidebar Logout Button Fix - Change from Red to White */
+        .sidebar .nav-link.text-danger {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        .sidebar .nav-link.text-danger:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
         }
         
         body.light-mode .table td {
@@ -248,6 +301,13 @@
         }
         
         /* Light Mode - Badges */
+        html body.light-mode .badge.bg-primary,
+        html body.light-mode .badge.bg-primary.fw-bold,
+        html body.light-mode .badge.bg-primary * {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
         body.light-mode .badge.bg-secondary-subtle {
             background-color: #f1f5f9 !important;
             color: #475569 !important;
@@ -633,6 +693,40 @@
         body.light-mode code {
             background: #f1f5f9 !important;
             color: #0f172a !important;
+        }
+
+        body.light-mode code {
+            background: #f1f5f9 !important;
+            color: #0f172a !important;
+        }
+
+        /* ============================================
+           SWEETALERT2 THEME OVERRIDES
+           ============================================ */
+        
+        /* Default Dark Mode */
+        div.swal2-popup {
+            background: #1e293b !important;
+            color: #fff !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        div.swal2-title, div.swal2-content, div.swal2-html-container {
+            color: #fff !important;
+        }
+
+        /* Light Mode Overrides */
+        body.light-mode div.swal2-popup {
+            background: #ffffff !important;
+            color: #1e293b !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode div.swal2-title, 
+        body.light-mode div.swal2-content, 
+        body.light-mode div.swal2-html-container {
+            color: #1e293b !important;
         }
 
         body {
@@ -1060,6 +1154,441 @@
             color: var(--text-main);
         }
         
+        /* ========================================
+           MODERN PROFILE DROPDOWN STYLES
+           ======================================== */
+        
+        .user-dropdown {
+            position: relative;
+        }
+        
+        .user-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 12px 6px 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 220px;
+            max-width: 260px;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1061;
+        }
+
+        .user-dropdown.show .user-dropdown-toggle {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background: #1e293b;
+            border-color: rgba(255, 255, 255, 0.1);
+            border-bottom-color: #1e293b;
+        }
+        
+        .user-dropdown-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+        
+        .user-avatar {
+            position: relative;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .user-avatar span {
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .status-dot {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border: 2px solid #1e293b;
+            border-radius: 50%;
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .user-name {
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+        
+        .user-role {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+        
+        .chevron-icon {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .user-dropdown.show .chevron-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Profile Dropdown Menu */
+        .profile-dropdown {
+            position: absolute !important;
+            inset: auto !important;
+            transform: none !important;
+            top: 100% !important;
+            margin-top: -1px;
+            width: 100%;
+            padding: 0;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+                        0 0 0 1px rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            z-index: 1060;
+        }
+        
+
+        
+
+        
+        /* Profile Menu */
+        .profile-menu {
+            padding: 4px;
+        }
+        
+        .profile-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .profile-menu-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .menu-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(59, 130, 246, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #60a5fa;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+        
+        .profile-menu-item:hover .menu-icon {
+            background: rgba(59, 130, 246, 0.25);
+            transform: scale(1.05);
+        }
+        
+        .menu-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-title {
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .menu-desc {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+        
+        .menu-arrow {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .profile-menu-item:hover .menu-arrow {
+            color: rgba(255, 255, 255, 0.6);
+            transform: translateX(3px);
+        }
+        
+        /* Theme Toggle Section */
+        .theme-toggle-section {
+            padding: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .theme-toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .theme-toggle-wrapper:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .theme-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(234, 179, 8, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fbbf24;
+            font-size: 1.1rem;
+        }
+        
+        .theme-label {
+            flex: 1;
+            color: white;
+            font-weight: 500;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        
+        /* Custom Toggle Switch */
+        .theme-switch {
+            position: relative;
+            width: 32px;
+            height: 18px;
+        }
+        
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .theme-switch .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-switch .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .theme-switch input:checked + .slider {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        }
+        
+        .theme-switch input:checked + .slider:before {
+            transform: translateX(14px);
+        }
+        
+        /* Profile Footer */
+        .profile-footer {
+            padding: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 8px;
+            color: #f87171;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
+        }
+        
+        /* Light Mode Overrides for Profile Dropdown */
+        body.light-mode .user-dropdown-toggle {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #e2e8f0;
+            color: #0f172a;
+        }
+        
+        body.light-mode .user-dropdown-toggle:hover {
+            background: #ffffff;
+            border-color: #cbd5e1;
+        }
+
+        body.light-mode .user-dropdown.show .user-dropdown-toggle {
+            background: #ffffff;
+            border-color: #e2e8f0;
+            border-bottom-color: #ffffff; /* Seamless blend with dropdown */
+            color: #0f172a;
+        }
+        
+        body.light-mode .top-navbar .user-dropdown-toggle .user-name {
+            color: #0f172a !important;
+        }
+        
+        body.light-mode .top-navbar .user-dropdown-toggle .user-role {
+            color: #64748b !important;
+        }
+        
+        body.light-mode .top-navbar .user-dropdown-toggle .chevron-icon {
+            color: #64748b !important;
+        }
+        
+        body.light-mode .status-dot {
+            border-color: #ffffff;
+        }
+        
+        body.light-mode .profile-dropdown {
+            background: #ffffff;
+            border-color: #e2e8f0;
+            border-top: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode .profile-menu-item:hover {
+            background: #f1f5f9;
+        }
+        
+        body.light-mode .menu-title {
+            color: #0f172a;
+            text-shadow: none;
+        }
+        
+        body.light-mode .menu-desc {
+            color: #64748b;
+        }
+        
+        body.light-mode .menu-arrow {
+            color: #94a3b8;
+        }
+        
+        body.light-mode .theme-toggle-section,
+        body.light-mode .profile-footer {
+            border-top-color: #e2e8f0;
+        }
+        
+        body.light-mode .theme-toggle-wrapper:hover {
+            background: #f1f5f9;
+        }
+        
+        body.light-mode .theme-label {
+            color: #0f172a;
+            text-shadow: none;
+        }
+        
+        body.light-mode .theme-switch .slider {
+            background: #e2e8f0;
+        }
+        
+        body.light-mode .logout-btn {
+            background: #fee2e2;
+            border-color: #fecaca;
+            color: #ef4444;
+            text-shadow: none;
+        }
+        
+        body.light-mode .logout-btn:hover {
+            background: #fecaca;
+            color: #dc2626;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 767.98px) {
+            .profile-dropdown {
+                position: fixed !important;
+                right: 10px !important;
+                left: 10px !important;
+                top: calc(var(--header-height) + 10px) !important;
+                width: auto;
+                max-width: none;
+            }
+            
+            .user-dropdown-toggle {
+                min-width: auto; /* Allow shrinking on mobile */
+                max-width: 200px; /* Limit width */
+                padding-right: 8px;
+            }
+            
+            .user-info {
+                display: flex !important; /* Force show */
+            }
+            
+            .user-name {
+                max-width: 100px; /* Truncate name if too long */
+            }
+            
+            body.light-mode .user-name,
+            body.light-mode .user-role {
+                color: #0f172a !important;
+            }
+        }
+        
         /* Fix for specific text-dark usages that might be on dark background */
         /* We target text-dark that is NOT inside a badge, alert, or light background */
         body:not(.bg-light):not(.bg-white) .text-dark:not(.badge):not(.alert):not(.btn):not(.bg-white):not(.bg-light):not(.bg-warning) {
@@ -1098,8 +1627,250 @@
             background-color: var(--secondary) !important;
             color: #ffffff !important;
         }
+
+        /* Global Search Styles */
+        .global-search-container .form-control {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .global-search-container .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .global-search-container .form-control:focus {
+            background: rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+        
+        .global-search-container .input-group-text {
+            border-radius: 8px 0 0 8px;
+        }
+
+        /* Search Suggestions Dropdown */
+        .search-suggestions-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            margin-top: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1050;
+            display: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .search-suggestions-dropdown.show {
+            display: block;
+            animation: fadeInDown 0.2s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .search-suggestion-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .search-suggestion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-suggestion-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .search-suggestion-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .search-suggestion-icon.unit { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .search-suggestion-icon.game { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .search-suggestion-icon.accessory { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+        
+        .search-suggestion-text {
+            flex: 1;
+        }
+        
+        .search-suggestion-text strong {
+            display: block;
+            font-weight: 600;
+        }
+        
+        .search-suggestion-text small {
+            color: var(--text-muted);
+        }
+        
+        .search-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+        
+        .search-loading {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .search-footer {
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.1);
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .search-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .search-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Light Mode Search Styles */
+        body.light-mode .global-search-form .form-control {
+            background: rgba(255, 255, 255, 0.9) !important;
+            color: #0f172a !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+        
+        body.light-mode .global-search-form .form-control::placeholder {
+            color: rgba(15, 23, 42, 0.5) !important;
+        }
+        
+        body.light-mode .global-search-form .input-group-text {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+        
+        body.light-mode .global-search-form .input-group-text i {
+            color: #64748b !important;
+            opacity: 1 !important;
+        }
+        
+        body.light-mode .search-suggestions-dropdown {
+            background: #ffffff;
+            border-color: #e2e8f0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        body.light-mode .search-suggestion-item {
+            color: #0f172a;
+            border-bottom-color: #e2e8f0;
+        }
+        
+        body.light-mode .search-suggestion-item:hover {
+            background: rgba(21, 93, 252, 0.08);
+        }
+        
+        body.light-mode .search-suggestion-text small {
+            color: #64748b;
+        }
+        
+        body.light-mode .search-footer {
+            background: #f8fafc;
+            border-top-color: #e2e8f0;
+        }
+        /* FORCE SIDEBAR TEXT WHITE GLOWING */
+        body.light-mode .sidebar,
+        body.light-mode .sidebar * {
+            color: #ffffff !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        body.light-mode .sidebar .nav-link {
+            color: #ffffff !important;
+        }
+
+        body.light-mode .sidebar .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15) !important;
+            color: #ffffff !important;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.light-mode .sidebar .nav-link.active {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4) !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
+            font-weight: 700 !important;
+        }
+
+        /* GLOBAL OVERRIDE FOR USERNAME VISIBILITY */
+        body.light-mode .user-name,
+        body.light-mode .user-role {
+            color: #0f172a !important;
+            text-shadow: none !important;
+        }
+        
+        body.light-mode .sidebar-heading {
+            color: rgba(255, 255, 255, 0.9) !important;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3) !important;
+        }
+
+        body.light-mode .logo-text {
+            color: #ffffff !important;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6) !important;
+        }
+        
+        /* Fix for specific text-danger or other utility classes in sidebar */
+        body.light-mode .sidebar .text-danger {
+            color: #ffffff !important;
+        }
+
+        /* FIX: Restore Logo Icon Color (Blue on White) */
+        body.light-mode .sidebar .logo-icon,
+        body.light-mode .sidebar .logo-icon i {
+            color: #155DFC !important;
+            text-shadow: none !important;
+        }
+        /* ULTRA SPECIFIC OVERRIDE FOR USERNAME */
+        html body.light-mode header.top-navbar .user-dropdown-toggle .user-name,
+        html body.light-mode header.top-navbar .user-dropdown-toggle .user-role {
+            color: #0f172a !important;
+            text-shadow: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        html body.light-mode header.top-navbar .user-dropdown-toggle .chevron-icon {
+            color: #64748b !important;
+        }
+        
+        /* ID-BASED OVERRIDE (HIGHEST SPECIFICITY) */
+        body.light-mode #topNavbar .user-name,
+        body.light-mode #topNavbar .user-role {
+            color: #0f172a !important;
+            text-shadow: none !important;
+        }
     </style>
     @yield('styles')
+    @stack('styles')
+
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -1132,40 +1903,111 @@
     </aside>
 
     <!-- Top Navbar -->
-    <header class="top-navbar" id="topNavbar">
-        <div class="d-flex align-items-center gap-3">
+    <!-- Top Navbar -->
+    <header class="top-navbar d-flex align-items-center justify-content-between px-3 px-md-4" id="topNavbar">
+        <!-- Left Section: Toggle Button -->
+        <div class="d-flex align-items-center">
             <button class="toggle-btn" id="sidebarToggle">
                 <i class="bi bi-list"></i>
             </button>
-            <h5 class="m-0 fw-semibold d-none d-md-block">@yield('header_title', 'Dashboard')</h5>
-            <button class="toggle-btn ms-2" id="themeToggle" title="Toggle Theme">
-                <i class="bi bi-moon-fill"></i>
-            </button>
+        </div>
+
+        <!-- Center Section: Search Bar -->
+        <div class="d-none d-md-block w-100 position-relative mx-auto" style="max-width: 400px;">
+            <form action="{{ route('search') }}" method="GET" class="global-search-form">
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0" style="border-color: rgba(255,255,255,0.2);">
+                        <i class="bi bi-search text-white-50"></i>
+                    </span>
+                    <input type="text" 
+                           name="q" 
+                           class="form-control bg-transparent border-start-0 text-white placeholder-white-50" 
+                           placeholder="Cari PS, game, aksesoris..." 
+                           autocomplete="off"
+                           id="globalSearchInput">
+                </div>
+            </form>
+            <div id="searchSuggestions" class="search-suggestions-dropdown d-none"></div>
         </div>
         
-        <div class="d-flex align-items-center gap-3">
-            <div class="dropdown">
-                <button class="btn btn-link text-white text-decoration-none dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
-                    <div id="navbarAvatar" class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold overflow-hidden" style="width: 32px; height: 32px;">
+        <!-- Mobile Search Button (Visible only on small screens) -->
+        <a href="{{ route('search') }}" class="toggle-btn d-md-none ms-auto me-2" title="Cari">
+            <i class="bi bi-search"></i>
+        </a>
+        
+        <!-- Right Section: User Dropdown -->
+        <div class="d-flex align-items-center justify-content-end gap-3">
+            <!-- User Dropdown -->
+            <div class="dropdown user-dropdown">
+                <button class="user-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="user-avatar">
                         @if(Auth::user()->avatar)
-                            <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar" class="w-100 h-100 object-fit-cover">
+                            <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar">
                         @else
-                            {{ substr(Auth::user()->name ?? 'U', 0, 1) }}
+                            <span>{{ substr(Auth::user()->name, 0, 1) }}</span>
                         @endif
+                        <div class="status-dot"></div>
                     </div>
-                    <span class="d-none d-sm-block">{{ Auth::user()->name ?? 'User' }}</span>
+                    <div class="user-info">
+                        <span class="user-name" style="color: var(--text-main) !important;">{{ Auth::user()->name }}</span>
+                        <span class="user-role" style="color: var(--text-muted) !important;">{{ ucfirst(Auth::user()->role ?? 'Pelanggan') }}</span>
+                    </div>
+                    <i class="bi bi-chevron-down chevron-icon" style="color: var(--text-muted) !important;"></i>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark border border-white border-opacity-10 shadow-lg">
-                    <li><h6 class="dropdown-header">Signed in as {{ Auth::user()->role ?? 'User' }}</h6></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bi bi-person me-2"></i> Profile</a></li>
-                    <li>
+                
+                <div class="dropdown-menu dropdown-menu-end profile-dropdown">
+
+                    
+                    <!-- Menu Items -->
+                    <div class="profile-menu">
+                        <a href="{{ route('profile.edit') }}" class="profile-menu-item">
+                            <div class="menu-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                            <div class="menu-content">
+                                <span class="menu-title">Profil Saya</span>
+                                <span class="menu-desc">Kelola informasi akun</span>
+                            </div>
+                            <i class="bi bi-chevron-right menu-arrow"></i>
+                        </a>
+                        
+                        <a href="{{ route('profile.edit') }}#password" class="profile-menu-item">
+                            <div class="menu-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                            <div class="menu-content">
+                                <span class="menu-title">Keamanan</span>
+                                <span class="menu-desc">Password & keamanan</span>
+                            </div>
+                            <i class="bi bi-chevron-right menu-arrow"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <div class="theme-toggle-section">
+                        <div class="theme-toggle-wrapper" id="themeToggleDropdown">
+                            <div class="theme-icon">
+                                <i class="bi bi-moon-stars"></i>
+                            </div>
+                            <span class="theme-label">Mode Gelap</span>
+                            <label class="theme-switch">
+                                <input type="checkbox" id="themeSwitchCheck">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Logout -->
+                    <div class="profile-footer">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
+                            <button type="submit" class="logout-btn">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Keluar</span>
+                            </button>
                         </form>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -1242,29 +2084,59 @@
 
 
             // Theme Toggle Logic
-            const themeToggleBtn = document.getElementById('themeToggle');
-            const themeIcon = themeToggleBtn.querySelector('i');
+        const themeToggleDropdown = document.getElementById('themeToggleDropdown');
+        const themeSwitchCheck = document.getElementById('themeSwitchCheck');
+        
+        // Check local storage
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            if(themeSwitchCheck) themeSwitchCheck.checked = true;
+        }
 
-            // Check local storage for theme
-            if (localStorage.getItem('theme') === 'light') {
-                body.classList.add('light-mode');
-                themeIcon.classList.remove('bi-moon-fill');
-                themeIcon.classList.add('bi-sun-fill');
+        function toggleTheme(e) {
+            if(e) {
+                e.preventDefault();
+                e.stopPropagation();
             }
-
-            themeToggleBtn.addEventListener('click', () => {
-                body.classList.toggle('light-mode');
-                
-                if (body.classList.contains('light-mode')) {
-                    localStorage.setItem('theme', 'light');
-                    themeIcon.classList.remove('bi-moon-fill');
-                    themeIcon.classList.add('bi-sun-fill');
-                } else {
-                    localStorage.setItem('theme', 'dark');
-                    themeIcon.classList.remove('bi-sun-fill');
-                    themeIcon.classList.add('bi-moon-fill');
+            
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            
+            // Update switch state
+            if(themeSwitchCheck) themeSwitchCheck.checked = isLight;
+            
+            // Save preference
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            
+            // Show toast
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             });
+            
+            Toast.fire({
+                icon: isLight ? 'info' : 'success',
+                title: isLight ? 'Light Mode Activated' : 'Dark Mode Activated'
+            });
+        }
+
+        if (themeToggleDropdown) {
+            themeToggleDropdown.addEventListener('click', toggleTheme);
+        }
+        
+        // Also handle direct clicks on the switch input
+        if (themeSwitchCheck) {
+            themeSwitchCheck.addEventListener('change', toggleTheme);
+            themeSwitchCheck.addEventListener('click', (e) => e.stopPropagation());
+        }
         });
 
         // Global Flash Message Function using SweetAlert2
@@ -1275,8 +2147,8 @@
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,
-                background: '#1e293b',
-                color: '#fff',
+                timerProgressBar: true,
+                // background and color removed to allow CSS styling
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -1296,12 +2168,11 @@
                 text: message,
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#6366f1', // Primary color
+                confirmButtonColor: '#3b82f6', // Primary blue color
                 cancelButtonColor: '#ef4444', // Danger color
                 confirmButtonText: 'Ya, Lanjutkan!',
                 cancelButtonText: 'Batal',
-                background: '#1e293b',
-                color: '#fff'
+                // background and color removed to allow CSS styling
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById(formId).submit();
@@ -1309,6 +2180,149 @@
             });
             return false;
         }
+
+        // Global Semantic Search Autocomplete
+        (function() {
+            const searchInput = document.getElementById('globalSearchInput');
+            const suggestionsDropdown = document.getElementById('searchSuggestions');
+            
+            if (!searchInput || !suggestionsDropdown) return;
+            
+            let debounceTimer;
+            let currentQuery = '';
+            
+            // Debounced search function
+            function performSearch(query) {
+                if (query.length < 2) {
+                    hideSuggestions();
+                    return;
+                }
+                
+                // Show loading state
+                suggestionsDropdown.innerHTML = `
+                    <div class="search-loading">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <span class="ms-2 text-muted">Mencari...</span>
+                    </div>
+                `;
+                showSuggestions();
+                
+                fetch(`{{ route('search.suggestions') }}?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (currentQuery !== query) return; // Query changed, ignore results
+                        
+                        if (data.length === 0) {
+                            suggestionsDropdown.innerHTML = `
+                                <div class="search-no-results">
+                                    <i class="bi bi-search text-muted mb-2" style="font-size: 1.5rem;"></i>
+                                    <p class="mb-0">Tidak ada hasil untuk "${query}"</p>
+                                    <small class="text-muted">Coba kata kunci lain</small>
+                                </div>
+                                <div class="search-footer">
+                                    <a href="{{ route('search') }}?q=${encodeURIComponent(query)}">
+                                        <i class="bi bi-arrow-right-circle me-1"></i>
+                                        Lihat semua hasil pencarian
+                                    </a>
+                                </div>
+                            `;
+                        } else {
+                            let html = '';
+                            data.forEach(item => {
+                                html += `
+                                    <a href="${item.url}" class="search-suggestion-item">
+                                        <div class="search-suggestion-icon ${item.type}">
+                                            <i class="bi ${item.icon}"></i>
+                                        </div>
+                                        <div class="search-suggestion-text">
+                                            <strong>${escapeHtml(item.text)}</strong>
+                                            <small>${escapeHtml(item.subtext)}</small>
+                                        </div>
+                                    </a>
+                                `;
+                            });
+                            html += `
+                                <div class="search-footer">
+                                    <a href="{{ route('search') }}?q=${encodeURIComponent(query)}">
+                                        <i class="bi bi-arrow-right-circle me-1"></i>
+                                        Lihat semua hasil untuk "${escapeHtml(query)}"
+                                    </a>
+                                </div>
+                            `;
+                            suggestionsDropdown.innerHTML = html;
+                        }
+                        showSuggestions();
+                    })
+                    .catch(error => {
+                        console.error('Search error:', error);
+                        hideSuggestions();
+                    });
+            }
+            
+            function showSuggestions() {
+                suggestionsDropdown.classList.add('show');
+            }
+            
+            function hideSuggestions() {
+                suggestionsDropdown.classList.remove('show');
+            }
+            
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            // Event listeners
+            searchInput.addEventListener('input', function(e) {
+                currentQuery = e.target.value.trim();
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => performSearch(currentQuery), 300);
+            });
+            
+            searchInput.addEventListener('focus', function() {
+                if (this.value.trim().length >= 2) {
+                    showSuggestions();
+                }
+            });
+            
+            // Close suggestions when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.global-search-container')) {
+                    hideSuggestions();
+                }
+            });
+            
+            // Keyboard navigation
+            searchInput.addEventListener('keydown', function(e) {
+                const items = suggestionsDropdown.querySelectorAll('.search-suggestion-item');
+                const activeItem = suggestionsDropdown.querySelector('.search-suggestion-item.active');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (!activeItem && items.length > 0) {
+                        items[0].classList.add('active');
+                        items[0].focus();
+                    } else if (activeItem && activeItem.nextElementSibling?.classList.contains('search-suggestion-item')) {
+                        activeItem.classList.remove('active');
+                        activeItem.nextElementSibling.classList.add('active');
+                        activeItem.nextElementSibling.focus();
+                    }
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (activeItem && activeItem.previousElementSibling?.classList.contains('search-suggestion-item')) {
+                        activeItem.classList.remove('active');
+                        activeItem.previousElementSibling.classList.add('active');
+                        activeItem.previousElementSibling.focus();
+                    }
+                } else if (e.key === 'Escape') {
+                    hideSuggestions();
+                    searchInput.blur();
+                }
+            });
+        })();
     </script>
     @yield('scripts')
 </body>
