@@ -100,12 +100,12 @@
                             <td>
                                 @php
                                     $statusClass = match($rental->status) {
-                                        'pending' => 'bg-warning-subtle',
-                                        'sedang_disewa' => 'bg-primary-subtle',
-                                        'menunggu_konfirmasi' => 'bg-info-subtle',
-                                        'selesai' => 'bg-success-subtle',
-                                        'cancelled' => 'bg-danger-subtle',
-                                        default => 'bg-secondary-subtle'
+                                        'pending' => 'badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10',
+                                        'sedang_disewa' => 'badge rounded-pill border border-primary text-primary bg-primary bg-opacity-10',
+                                        'menunggu_konfirmasi' => 'badge rounded-pill border border-info text-info bg-info bg-opacity-10',
+                                        'selesai' => 'badge rounded-pill border border-success text-success bg-success bg-opacity-10',
+                                        'cancelled' => 'badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10',
+                                        default => 'badge rounded-pill border border-secondary text-secondary bg-secondary bg-opacity-10'
                                     };
                                     $statusText = match($rental->status) {
                                         'pending' => 'Menunggu Pembayaran',
@@ -116,15 +116,15 @@
                                         default => ucfirst($rental->status)
                                     };
                                 @endphp
-                                <span class="badge {{ $statusClass }}">{{ $statusText }}</span>
+                                <span class="{{ $statusClass }}">{{ $statusText }}</span>
                             </td>
                             <td>
                                 @if($rental->paid >= $rental->total)
-                                    <span class="badge bg-success text-white"><i class="bi bi-check-lg me-1"></i>LUNAS</span>
+                                    <span class="badge rounded-pill border border-success text-success bg-success bg-opacity-10"><i class="bi bi-check-lg me-1"></i>LUNAS</span>
                                 @elseif($rental->paid > 0)
-                                    <span class="badge bg-warning text-dark"><i class="bi bi-exclamation-triangle me-1"></i>KURANG</span>
+                                    <span class="badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10"><i class="bi bi-exclamation-triangle me-1"></i>KURANG</span>
                                 @else
-                                    <span class="badge bg-danger text-white"><i class="bi bi-x-lg me-1"></i>BELUM</span>
+                                    <span class="badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10"><i class="bi bi-x-lg me-1"></i>BELUM</span>
                                 @endif
                             </td>
                             <td>
