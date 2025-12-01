@@ -62,12 +62,12 @@
                         <td>
                             @php
                               $statusBadge = match($r->status) {
-                                'pending' => ['class' => 'bg-warning-subtle', 'text' => 'Menunggu Pembayaran'],
-                                'sedang_disewa' => ['class' => 'bg-success-subtle', 'text' => 'Sedang Disewa'],
-                                'menunggu_konfirmasi' => ['class' => 'bg-info-subtle', 'text' => '⚠️ Menunggu Konfirmasi'],
-                                'selesai' => ['class' => 'bg-primary-subtle', 'text' => 'Selesai'],
-                                'cancelled' => ['class' => 'bg-danger-subtle', 'text' => 'Dibatalkan'],
-                                default => ['class' => 'bg-secondary-subtle', 'text' => ucfirst($r->status)]
+                                'pending' => ['class' => 'badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10', 'text' => 'Menunggu Pembayaran'],
+                                'sedang_disewa' => ['class' => 'badge rounded-pill border border-primary text-primary bg-primary bg-opacity-10', 'text' => 'Sedang Disewa'],
+                                'menunggu_konfirmasi' => ['class' => 'badge rounded-pill border border-info text-info bg-info bg-opacity-10', 'text' => '⚠️ Menunggu Konfirmasi'],
+                                'selesai' => ['class' => 'badge rounded-pill border border-success text-success bg-success bg-opacity-10', 'text' => 'Selesai'],
+                                'cancelled' => ['class' => 'badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10', 'text' => 'Dibatalkan'],
+                                default => ['class' => 'badge rounded-pill border border-secondary text-secondary bg-secondary bg-opacity-10', 'text' => ucfirst($r->status)]
                               };
                             @endphp
                             <span class="badge {{ $statusBadge['class'] }}">{{ $statusBadge['text'] }}</span>
@@ -76,11 +76,11 @@
                         <td class="text-white">Rp {{ number_format($r->paid ?? 0, 0, ',', '.') }}</td>
                         <td>
                             @if($r->paid >= $r->total)
-                                <span class="badge bg-success-subtle"><i class="bi bi-check-circle-fill me-1"></i> LUNAS</span>
+                                <span class="badge rounded-pill border border-success text-success bg-success bg-opacity-10"><i class="bi bi-check-circle-fill me-1"></i> LUNAS</span>
                             @elseif($r->paid > 0)
-                                <span class="badge bg-warning-subtle"><i class="bi bi-exclamation-circle me-1"></i> KURANG</span>
+                                <span class="badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10"><i class="bi bi-exclamation-circle me-1"></i> KURANG</span>
                             @else
-                                <span class="badge bg-danger-subtle"><i class="bi bi-x-circle-fill me-1"></i> BELUM</span>
+                                <span class="badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10"><i class="bi bi-x-circle-fill me-1"></i> BELUM</span>
                             @endif
                         </td>
                         <td class="text-muted">{{ $r->created_at->format('d/m/Y') }}</td>
