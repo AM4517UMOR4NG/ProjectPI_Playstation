@@ -218,7 +218,7 @@
   </div>
   
   @if($unitps->count() > 0)
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 px-2">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-2">
       @foreach($unitps as $unit)
         <div class="col">
           <div class="dash-card">
