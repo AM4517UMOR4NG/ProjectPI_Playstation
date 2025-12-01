@@ -149,7 +149,7 @@
                         </a>
                     @else
                         <a href="{{ route('pelanggan.rentals.create') }}"
-                            class="btn btn-success btn-lg px-5 fw-bold shadow-lg">
+                            class="btn btn-primary btn-lg px-5 fw-bold shadow-lg text-white">
                             <i class="bi bi-check-circle me-2"></i> Checkout Sekarang
                         </a>
                     @endif

@@ -30,9 +30,13 @@
             <div class="card h-100 text-center p-4">
                 <div class="card-body">
                     <div class="position-relative d-inline-block mb-4">
-                        <div class="rounded-circle bg-dark d-flex align-items-center justify-content-center mx-auto shadow-lg" 
+                        <div class="rounded-circle bg-dark d-flex align-items-center justify-content-center mx-auto shadow-lg overflow-hidden" 
                              style="width: 120px; height: 120px; border: 4px solid var(--card-border);">
-                            <i class="bi bi-person-fill display-1 text-muted"></i>
+                            @if($user->avatar)
+                                <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar" class="w-100 h-100 object-fit-cover">
+                            @else
+                                <i class="bi bi-person-fill display-1 text-muted"></i>
+                            @endif
                         </div>
                         <div class="position-absolute bottom-0 end-0 bg-success rounded-circle border border-dark p-2" 
                              style="width: 24px; height: 24px;"></div>
