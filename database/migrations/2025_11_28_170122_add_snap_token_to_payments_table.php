@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->text('snap_token')->nullable()->after('order_id');
-            $table->timestamp('snap_token_expires_at')->nullable()->after('snap_token');
+            //
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->dropColumn(['snap_token', 'snap_token_expires_at']);
+            //
         });
     }
 };
