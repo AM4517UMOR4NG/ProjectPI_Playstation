@@ -27,14 +27,6 @@
         <i class="bi bi-box-seam"></i>
         <span>Status Unit</span>
     </a>
-    <a href="{{ route('pemilik.item_rusak') }}" class="nav-link {{ request()->routeIs('pemilik.item_rusak') ? 'active' : '' }}">
-        <i class="bi bi-exclamation-triangle"></i>
-        <span>Item Rusak</span>
-    </a>
-    <a href="{{ route('pemilik.transaksi_dibatalkan') }}" class="nav-link {{ request()->routeIs('pemilik.transaksi_dibatalkan') ? 'active' : '' }}">
-        <i class="bi bi-x-circle"></i>
-        <span>Transaksi Dibatalkan</span>
-    </a>
 @endsection
 
 @section('content')
