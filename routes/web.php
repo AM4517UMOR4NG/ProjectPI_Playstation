@@ -27,7 +27,6 @@ use App\Http\Controllers\Kasir\TransaksiController;
 use App\Http\Controllers\Admin\ImpersonateController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SearchController;
 use App\Models\UnitPS;
 use App\Models\Game;
 use App\Models\Accessory;
@@ -99,10 +98,6 @@ Route::get('/auth', function () {
 })->name('login');
 
 Route::middleware(['web', 'auth'])->group(function () {
-    // Global Semantic Search
-    Route::get('/search', [SearchController::class, 'search'])->name('search');
-    Route::get('/search/suggestions', [SearchController::class, 'suggestions'])->name('search.suggestions');
-
     // Unified Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -194,15 +189,11 @@ Route::middleware(['web', 'auth'])->group(function () {
         ->middleware(['throttle:3,1', 'ensure.profile.complete']) // Max 3 requests per minute + check profile
         ->name('pelanggan.rentals.store');
     Route::get('pelanggan/rentals/{rental}', [PelangganRentalController::class, 'show'])->name('pelanggan.rentals.show');
-    Route::get('pelanggan/rentals/{rental}/pay', [PelangganRentalController::class, 'resumePayment'])->name('pelanggan.rentals.pay');
     Route::post('pelanggan/rentals/{rental}/return', [PelangganRentalController::class, 'returnRental'])->name('pelanggan.rentals.return');
-    Route::post('pelanggan/rentals/{rental}/cancel', [PelangganRentalController::class, 'cancel'])->name('pelanggan.rentals.cancel');
 });
 
 Route::middleware(['web', 'auth', 'can:access-pemilik'])->prefix('pemilik')->name('pemilik.')->group(function () {
     Route::get('status-produk', [StatusProdukController::class, 'index'])->name('status_produk');
-    Route::get('item-rusak', [StatusProdukController::class, 'damaged'])->name('item_rusak');
-    Route::get('transaksi-dibatalkan', [StatusProdukController::class, 'cancelledTransactions'])->name('transaksi_dibatalkan');
     Route::get('laporan-transaksi', [LaporanController::class, 'index'])->name('laporan_transaksi');
     Route::get('laporan-pendapatan', [LaporanController::class, 'pendapatan'])->name('laporan_pendapatan');
     Route::get('laporan-pendapatan/export', [LaporanController::class, 'exportPendapatan'])->name('laporan_pendapatan.export');
@@ -211,11 +202,9 @@ Route::middleware(['web', 'auth', 'can:access-pemilik'])->prefix('pemilik')->nam
 
 Route::middleware(['web', 'auth', 'can:access-kasir'])->prefix('kasir')->name('kasir.')->group(function () {
     Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi.index'); // form cari
-    Route::get('transaksi/dibatalkan', [TransaksiController::class, 'cancelled'])->name('transaksi.cancelled'); // daftar transaksi dibatalkan
     Route::get('transaksi/{rental}', [TransaksiController::class, 'show'])->name('transaksi.show'); // detail
     Route::post('transaksi/{rental}/pengembalian', [TransaksiController::class, 'pengembalian'])->name('transaksi.pengembalian'); // konfirmasi
     Route::post('transaksi/{rental}/aktifkan', [TransaksiController::class, 'aktifkan'])->name('transaksi.aktifkan'); // aktifkan sewa setelah dibayar
-    Route::post('transaksi/{rental}/cancel', [TransaksiController::class, 'cancel'])->name('transaksi.cancel'); // batalkan transaksi pending
     
     // Kasir - Rentals Management
     Route::get('rentals', [KasirRentalController::class, 'index'])->name('rentals.index');
