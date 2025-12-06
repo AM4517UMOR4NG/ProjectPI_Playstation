@@ -100,12 +100,12 @@
                             <td>
                                 @php
                                     $statusClass = match($rental->status) {
-                                        'pending' => 'badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10',
-                                        'sedang_disewa' => 'badge rounded-pill border border-primary text-primary bg-primary bg-opacity-10',
-                                        'menunggu_konfirmasi' => 'badge rounded-pill border border-info text-info bg-info bg-opacity-10',
-                                        'selesai' => 'badge rounded-pill border border-success text-success bg-success bg-opacity-10',
-                                        'cancelled' => 'badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10',
-                                        default => 'badge rounded-pill border border-secondary text-secondary bg-secondary bg-opacity-10'
+                                        'pending' => 'bg-warning-subtle',
+                                        'sedang_disewa' => 'bg-primary-subtle',
+                                        'menunggu_konfirmasi' => 'bg-info-subtle',
+                                        'selesai' => 'bg-success-subtle',
+                                        'cancelled' => 'bg-danger-subtle',
+                                        default => 'bg-secondary-subtle'
                                     };
                                     $statusText = match($rental->status) {
                                         'pending' => 'Menunggu Pembayaran',
@@ -116,34 +116,21 @@
                                         default => ucfirst($rental->status)
                                     };
                                 @endphp
-                                <span class="{{ $statusClass }}">{{ $statusText }}</span>
+                                <span class="badge {{ $statusClass }}">{{ $statusText }}</span>
                             </td>
                             <td>
                                 @if($rental->paid >= $rental->total)
-                                    <span class="badge rounded-pill border border-success text-success bg-success bg-opacity-10"><i class="bi bi-check-lg me-1"></i>LUNAS</span>
+                                    <span class="badge bg-success text-white"><i class="bi bi-check-lg me-1"></i>LUNAS</span>
                                 @elseif($rental->paid > 0)
-                                    <span class="badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10"><i class="bi bi-exclamation-triangle me-1"></i>KURANG</span>
+                                    <span class="badge bg-warning text-dark"><i class="bi bi-exclamation-triangle me-1"></i>KURANG</span>
                                 @else
-                                    <span class="badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10"><i class="bi bi-x-lg me-1"></i>BELUM</span>
+                                    <span class="badge bg-danger text-white"><i class="bi bi-x-lg me-1"></i>BELUM</span>
                                 @endif
                             </td>
                             <td>
-                                <div class="d-flex gap-1">
-                                    <a href="{{ route('pelanggan.rentals.show', $rental) }}" class="btn btn-sm btn-info text-white">
-                                        <i class="bi bi-eye me-1"></i> Detail
-                                    </a>
-                                    @if($rental->status === 'pending')
-                                        @php
-                                            $pendingPayment = $rental->payments->where('transaction_status', 'pending')->first();
-                                            $canResume = $pendingPayment && $pendingPayment->canResume();
-                                        @endphp
-                                        @if($canResume)
-                                            <a href="{{ route('pelanggan.rentals.pay', $rental) }}" class="btn btn-sm btn-success">
-                                                <i class="bi bi-credit-card me-1"></i> Bayar
-                                            </a>
-                                        @endif
-                                    @endif
-                                </div>
+                                <a href="{{ route('pelanggan.rentals.show', $rental) }}" class="btn btn-sm btn-info text-white">
+                                    <i class="bi bi-eye me-1"></i> Detail
+                                </a>
                             </td>
                         </tr>
                     @empty
