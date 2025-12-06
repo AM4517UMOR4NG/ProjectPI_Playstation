@@ -2,54 +2,6 @@
 @section('title','Laporan Pendapatan')
 @section('owner_content')
 
-<style>
-/* Light Mode Fixes untuk Laporan Pendapatan */
-body.light-mode .card[style*="rgba(30, 41, 59, 0.7)"] {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
-    border: 1px solid #cbd5e1 !important;
-}
-
-body.light-mode .card[style*="rgba(30, 41, 59, 0.7)"] .text-white {
-    color: #1e293b !important;
-}
-
-body.light-mode .card[style*="rgba(30, 41, 59, 0.7)"] .text-muted {
-    color: #64748b !important;
-}
-
-body.light-mode .modal-content.bg-dark {
-    background: #ffffff !important;
-    color: #1e293b !important;
-    border: 1px solid #e2e8f0 !important;
-}
-
-body.light-mode .modal-content.bg-dark .text-white {
-    color: #1e293b !important;
-}
-
-body.light-mode .modal-content.bg-dark .text-muted {
-    color: #64748b !important;
-}
-
-body.light-mode .modal-content.bg-dark .form-control.bg-dark {
-    background: #ffffff !important;
-    color: #1e293b !important;
-    border-color: #cbd5e1 !important;
-}
-
-body.light-mode .modal-content.bg-dark .border-secondary {
-    border-color: #e2e8f0 !important;
-}
-
-body.light-mode .table thead.bg-light.bg-opacity-10 {
-    background: #f8fafc !important;
-}
-
-body.light-mode .table .text-white {
-    color: #1e293b !important;
-}
-</style>
-
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h2 class="fw-bold text-white mb-1">Laporan Pendapatan</h2>
@@ -226,20 +178,12 @@ body.light-mode .table .text-white {
         }
         
         document.addEventListener('DOMContentLoaded', function() {
-            // Set chart colors based on theme
-            const isLightMode = document.body.classList.contains('light-mode');
-            
-            if (isLightMode) {
-                Chart.defaults.color = '#475569';
-                Chart.defaults.borderColor = 'rgba(71, 85, 105, 0.2)';
-            } else {
-                Chart.defaults.color = '#94a3b8';
-                Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.1)';
-            }
+            Chart.defaults.color = '#94a3b8';
+            Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.1)';
             
             const revCtx = document.getElementById('revChart');
             if (revCtx) {
-                const chartConfig = {
+                new Chart(revCtx, {
                     type: 'line',
                     data: {
                         labels: @json($revLabels ?? []),
@@ -247,12 +191,12 @@ body.light-mode .table .text-white {
                             label: 'Pendapatan',
                             data: @json($revData ?? []),
                             borderColor: '#10b981',
-                            backgroundColor: isLightMode ? 'rgba(16, 185, 129, 0.15)' : 'rgba(16, 185, 129, 0.1)',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
                             borderWidth: 3,
                             tension: 0.4,
                             fill: true,
                             pointBackgroundColor: '#10b981',
-                            pointBorderColor: isLightMode ? '#ffffff' : '#fff',
+                            pointBorderColor: '#fff',
                             pointBorderWidth: 2,
                             pointRadius: 5,
                             pointHoverRadius: 7
@@ -264,11 +208,9 @@ body.light-mode .table .text-white {
                         plugins: {
                             legend: { display: false },
                             tooltip: {
-                                backgroundColor: isLightMode ? '#ffffff' : '#1e293b',
-                                titleColor: isLightMode ? '#1e293b' : '#fff',
-                                bodyColor: isLightMode ? '#475569' : '#cbd5e1',
-                                borderColor: isLightMode ? '#e2e8f0' : 'transparent',
-                                borderWidth: isLightMode ? 1 : 0,
+                                backgroundColor: '#1e293b',
+                                titleColor: '#fff',
+                                bodyColor: '#cbd5e1',
                                 padding: 12,
                                 cornerRadius: 8,
                                 callbacks: {
@@ -293,9 +235,7 @@ body.light-mode .table .text-white {
                             }
                         }
                     }
-                };
-                
-                new Chart(revCtx, chartConfig);
+                });
             }
         });
     </script>
