@@ -54,22 +54,6 @@
                 <button type="submit" class="btn btn-primary"><i class="bi bi-play-circle me-1"></i> Aktifkan Sewa</button>
             </form>
         @endif
-        
-        @if($rental->status === 'pending')
-            <div class="mt-3 d-flex gap-2">
-                <form method="POST" action="{{ route('kasir.transaksi.aktifkan', $rental) }}">
-                    @csrf
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-play-circle me-1"></i> Aktifkan Sewa</button>
-                </form>
-                <form method="POST" action="{{ route('kasir.transaksi.cancel', $rental) }}" onsubmit="return confirm('Apakah Anda yakin ingin membatalkan transaksi ini?');">
-                    @csrf
-                    <button type="submit" class="btn btn-danger"><i class="bi bi-x-circle me-1"></i> Batalkan Transaksi</button>
-                </form>
-            </div>
-            <div class="text-muted small mt-2">
-                <i class="bi bi-info-circle me-1"></i> Transaksi pending dapat dibatalkan jika pelanggan tidak melakukan pembayaran.
-            </div>
-        @endif
     </div>
 
     <div class="card p-3">
