@@ -124,68 +124,6 @@
         </div>
     </div>
 
-    <!-- Unit Rusak Section -->
-    @if(($totalDamaged ?? 0) > 0)
-    <div class="row g-4 mb-4">
-        <div class="col-12">
-            <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
-                <div class="card-body text-white">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-white bg-opacity-25 rounded-3 p-2 me-3">
-                            <i class="bi bi-exclamation-triangle fs-4"></i>
-                        </div>
-                        <div>
-                            <h5 class="fw-bold mb-0">Perhatian: {{ $totalDamaged }} Item Rusak</h5>
-                            <p class="mb-0 opacity-75 small">Beberapa item memerlukan perbaikan atau penggantian</p>
-                        </div>
-                    </div>
-                    <div class="row g-3">
-                        @if(($damagedUnits ?? 0) > 0)
-                        <div class="col-md-4">
-                            <div class="bg-white bg-opacity-15 rounded-3 p-3">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-controller fs-4 me-2"></i>
-                                    <div>
-                                        <div class="fw-bold">{{ $damagedUnits }} Unit PS</div>
-                                        <small class="opacity-75">Kondisi Rusak</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                        @if(($damagedGames ?? 0) > 0)
-                        <div class="col-md-4">
-                            <div class="bg-white bg-opacity-15 rounded-3 p-3">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-disc fs-4 me-2"></i>
-                                    <div>
-                                        <div class="fw-bold">{{ $damagedGames }} Game</div>
-                                        <small class="opacity-75">Kondisi Rusak</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                        @if(($damagedAccessories ?? 0) > 0)
-                        <div class="col-md-4">
-                            <div class="bg-white bg-opacity-15 rounded-3 p-3">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-headset fs-4 me-2"></i>
-                                    <div>
-                                        <div class="fw-bold">{{ $damagedAccessories }} Aksesoris</div>
-                                        <small class="opacity-75">Kondisi Rusak</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-
     <!-- Transaksi Terbaru (Brief List) -->
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-transparent border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
