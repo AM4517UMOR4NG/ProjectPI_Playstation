@@ -84,15 +84,15 @@
                             <div class="col-7">
                                 @php
                                   $statusBadge = match($rental->status) {
-                                    'pending' => ['class' => 'badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10', 'text' => 'Menunggu Pembayaran'],
-                                    'sedang_disewa' => ['class' => 'badge rounded-pill border border-primary text-primary bg-primary bg-opacity-10', 'text' => 'Sedang Disewa'],
-                                    'menunggu_konfirmasi' => ['class' => 'badge rounded-pill border border-info text-info bg-info bg-opacity-10', 'text' => 'Menunggu Konfirmasi'],
-                                    'selesai' => ['class' => 'badge rounded-pill border border-success text-success bg-success bg-opacity-10', 'text' => 'Selesai'],
-                                    'cancelled' => ['class' => 'badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10', 'text' => 'Dibatalkan'],
-                                    default => ['class' => 'badge rounded-pill border border-secondary text-secondary bg-secondary bg-opacity-10', 'text' => ucfirst($rental->status)]
+                                    'pending' => ['class' => 'bg-warning-subtle', 'text' => 'Menunggu Pembayaran'],
+                                    'sedang_disewa' => ['class' => 'bg-success-subtle', 'text' => 'Sedang Disewa'],
+                                    'menunggu_konfirmasi' => ['class' => 'bg-info-subtle', 'text' => 'Menunggu Konfirmasi'],
+                                    'selesai' => ['class' => 'bg-primary-subtle', 'text' => 'Selesai'],
+                                    'cancelled' => ['class' => 'bg-danger-subtle', 'text' => 'Dibatalkan'],
+                                    default => ['class' => 'bg-secondary-subtle', 'text' => ucfirst($rental->status)]
                                   };
                                 @endphp
-                                <span class="{{ $statusBadge['class'] }}">{{ $statusBadge['text'] }}</span>
+                                <span class="badge {{ $statusBadge['class'] }}">{{ $statusBadge['text'] }}</span>
                             </div>
                         </div>
                     </div>
@@ -109,11 +109,11 @@
                             <div class="col-5 text-muted"><i class="bi bi-credit-card me-1"></i> Status Bayar</div>
                             <div class="col-7">
                                 @if($rental->paid >= $rental->total)
-                                    <span class="badge rounded-pill border border-success text-success bg-success bg-opacity-10"><i class="bi bi-check-circle-fill me-1"></i> LUNAS</span>
+                                    <span class="badge bg-success-subtle"><i class="bi bi-check-circle-fill me-1"></i> LUNAS</span>
                                 @elseif($rental->paid > 0)
-                                    <span class="badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10"><i class="bi bi-exclamation-circle-fill me-1"></i> KURANG BAYAR</span>
+                                    <span class="badge bg-warning-subtle"><i class="bi bi-exclamation-circle-fill me-1"></i> KURANG BAYAR</span>
                                 @else
-                                    <span class="badge rounded-pill border border-danger text-danger bg-danger bg-opacity-10"><i class="bi bi-x-circle-fill me-1"></i> BELUM LUNAS</span>
+                                    <span class="badge bg-danger-subtle"><i class="bi bi-x-circle-fill me-1"></i> BELUM LUNAS</span>
                                 @endif
                             </div>
                         </div>
@@ -145,80 +145,13 @@
                     @endif
 
                     @if($rental->status === 'pending' && $rental->payments->count() > 0)
-                        @php
-                            $pendingPayment = $rental->payments->where('transaction_status', 'pending')->first();
-                            $canResume = $pendingPayment && $pendingPayment->canResume();
-                            $expiresAt = $pendingPayment?->snap_token_expires_at;
-                        @endphp
-                        
                         <div class="mt-4">
-                            @if($canResume)
-                                <!-- Resume Payment Button -->
-                                <a href="{{ route('pelanggan.rentals.pay', $rental) }}" class="btn btn-success btn-lg w-100 fw-bold mb-3">
-                                    <i class="bi bi-credit-card me-2"></i> Lanjutkan Pembayaran
-                                </a>
-                                
-                                @if($expiresAt)
-                                    <div class="alert alert-warning border-0 bg-warning-subtle text-warning mb-3">
-                                        <i class="bi bi-clock me-2"></i>
-                                        <strong>Batas Waktu Pembayaran:</strong><br>
-                                        <span class="fs-5">{{ $expiresAt->format('d M Y, H:i') }} WIB</span>
-                                        <br>
-                                        <small class="text-muted">({{ $expiresAt->diffForHumans() }})</small>
-                                    </div>
-                                @endif
-                                
-                                <div class="alert alert-info border-0 bg-info-subtle text-info mb-3">
-                                    <i class="bi bi-info-circle me-2"></i>
-                                    <strong>Cara Pembayaran:</strong>
-                                    <ol class="mb-0 mt-2 ps-3">
-                                        <li>Klik tombol "Lanjutkan Pembayaran" di atas</li>
-                                        <li>Pilih metode pembayaran (QRIS, Transfer Bank, E-Wallet, dll)</li>
-                                        <li>Ikuti instruksi pembayaran yang muncul</li>
-                                        <li>Selesaikan pembayaran sebelum batas waktu</li>
-                                    </ol>
-                                </div>
-                            @else
-                                <div class="alert alert-danger border-0 bg-danger-subtle text-danger mb-3">
-                                    <i class="bi bi-exclamation-triangle me-2"></i>
-                                    <strong>Token Pembayaran Kadaluarsa</strong><br>
-                                    <small>Silakan hubungi admin untuk membuat pesanan baru.</small>
-                                </div>
-                            @endif
-                            
-                            <!-- Check Payment Status Button -->
-                            <button id="check-payment-btn" class="btn btn-outline-primary w-100 fw-bold" data-order-id="{{ $rental->payments->first()->order_id }}">
+                            <button id="check-payment-btn" class="btn btn-primary w-100 fw-bold" data-order-id="{{ $rental->payments->first()->order_id }}">
                                 <i class="bi bi-arrow-clockwise me-2"></i> Cek Status Pembayaran
                             </button>
                             <div class="text-muted small mt-2 text-center">
                                 <i class="bi bi-info-circle me-1"></i> Klik jika Anda sudah membayar tapi status belum berubah.
                             </div>
-                            
-                            <!-- Cancel Button (only within 30 minutes) -->
-                            @php
-                                $minutesPassed = now()->diffInMinutes($rental->created_at);
-                                $canCancel = $minutesPassed <= 30;
-                                $remainingMinutes = 30 - $minutesPassed;
-                            @endphp
-                            
-                            <hr class="my-3">
-                            
-                            @if($canCancel)
-                                <form action="{{ route('pelanggan.rentals.cancel', $rental) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin membatalkan transaksi ini?');">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-danger w-100">
-                                        <i class="bi bi-x-circle me-2"></i> Batalkan Transaksi
-                                    </button>
-                                </form>
-                                <div class="text-muted small mt-2 text-center">
-                                    <i class="bi bi-clock me-1"></i> Anda dapat membatalkan dalam {{ $remainingMinutes }} menit lagi.
-                                </div>
-                            @else
-                                <div class="alert alert-secondary border-0 mb-0">
-                                    <i class="bi bi-clock-history me-2"></i>
-                                    <small>Waktu pembatalan sudah lewat (lebih dari 30 menit). Hubungi kasir jika ingin membatalkan.</small>
-                                </div>
-                            @endif
                         </div>
                     @endif
                 </div>
@@ -319,11 +252,11 @@
                                     $status = $payment->transaction_status ?? 'pending';
                                 @endphp
                                 @if(in_array($status, ['settlement', 'capture']))
-                                    <span class="badge rounded-pill border border-success text-success bg-success bg-opacity-10"><i class="bi bi-check-circle me-1"></i> Lunas</span>
+                                    <span class="badge bg-success-subtle"><i class="bi bi-check-circle me-1"></i> Lunas</span>
                                 @elseif($status == 'pending')
-                                    <span class="badge rounded-pill border border-warning text-warning bg-warning bg-opacity-10"><i class="bi bi-hourglass-split me-1"></i> Menunggu</span>
+                                    <span class="badge bg-warning-subtle"><i class="bi bi-hourglass-split me-1"></i> Menunggu</span>
                                 @else
-                                    <span class="badge rounded-pill border border-secondary text-secondary bg-secondary bg-opacity-10">{{ ucfirst($status) }}</span>
+                                    <span class="badge bg-secondary-subtle">{{ ucfirst($status) }}</span>
                                 @endif
                             </td>
                         </tr>
