@@ -20,7 +20,7 @@
   .dash-hero h2{ 
     font-weight:800; 
     font-size: 2.5rem;
-    background: linear-gradient(135deg, #60a5fa, #3b82f6, #2563eb);
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #34d399);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -63,7 +63,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #3b82f6, #2563eb, #1d4ed8);
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #10b981);
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -119,10 +119,10 @@
   
   /* Price & Badge */
   .text-price{ 
-    color: #60a5fa !important; 
+    color: #10b981 !important; 
     font-weight: bold; 
     font-size: 1.25rem;
-    text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
   }
   
   .badge-stock {
@@ -131,9 +131,9 @@
     border-radius: 0.75rem;
     font-weight: 700;
     font-size: 0.9rem;
-    background: rgba(59, 130, 246, 0.2);
-    color: #60a5fa;
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
     animation: pulse 2s infinite;
   }
   
@@ -144,7 +144,7 @@
   
   /* Buttons */
   .btn-cta{ 
-    background: linear-gradient(135deg, #3b82f6, #2563eb); 
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6); 
     color: #fff;
     border: none;
     padding: 0.875rem 1.5rem;
