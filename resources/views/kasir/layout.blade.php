@@ -12,13 +12,9 @@
     
     <div class="sidebar-heading">Operasional</div>
     
-    <a href="{{ route('kasir.transaksi.index') }}" class="nav-link {{ request()->routeIs('kasir.transaksi.index') || request()->routeIs('kasir.transaksi.show') ? 'active' : '' }}">
+    <a href="{{ route('kasir.transaksi.index') }}" class="nav-link {{ request()->routeIs('kasir.transaksi.*') ? 'active' : '' }}">
         <i class="bi bi-receipt"></i>
         <span>Transaksi</span>
-    </a>
-    <a href="{{ route('kasir.transaksi.cancelled') }}" class="nav-link {{ request()->routeIs('kasir.transaksi.cancelled') ? 'active' : '' }}">
-        <i class="bi bi-x-circle"></i>
-        <span>Transaksi Dibatalkan</span>
     </a>
     <a href="{{ route('kasir.rentals.index') }}" class="nav-link {{ request()->routeIs('kasir.rentals.*') ? 'active' : '' }}">
         <i class="bi bi-list-check"></i>
