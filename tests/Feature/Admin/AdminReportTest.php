@@ -25,6 +25,9 @@ class AdminReportTest extends TestCase
 
     public function test_admin_can_view_report_page_with_correct_stats()
     {
+        // Fix flaky test on 1st of month
+        \Illuminate\Support\Carbon::setTestNow(now()->startOfMonth()->addDays(15));
+
         // 1. Setup Data
         
         // Rental 1: Active, Paid Today
